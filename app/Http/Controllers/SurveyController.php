@@ -95,4 +95,16 @@ class SurveyController extends Controller
 
         return redirect()->route('surveys.index')->with('success', 'Survey berhasil dihapus');
     }
+    public function susu()
+    {
+        return view('home.survey.susu-formula');
+    }
+    public function gigi()
+    {
+        return view('home.survey.sikat-gigi');
+    }
+    public function asuh()
+    {
+        return view('home.survey.pola-asuh');
+    }
 }
