@@ -14,6 +14,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css" />
 </head>
 <title>Survey Gigi</title>
+
+<style>
+    .truncate-deskripsi {
+        display: -webkit-box;
+
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+
+        line-height: 1.5;
+
+        max-height: 3em;
+
+    }
+</style>
 </head>
 
 <body>
