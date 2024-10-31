@@ -59,7 +59,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/tentang-kami', [HomeController::class, 'about'])->name('about');
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
-Route::get('/surveys/survey-susu-formula/{id}', [SurveyController::class, 'susu'])->name('susu');
+Route::get('/survey/survey-susu-formula/{id}', [SurveyController::class, 'susu'])->name('susu');
 Route::get('/survey-menyikat gigi', [SurveyController::class, 'gigi'])->name('gigi');
 Route::get('/survey-pola-asuh', [SurveyController::class, 'asuh'])->name('asuh');
 
@@ -77,20 +77,20 @@ Route::prefix('admin')->group(function () {
         Route::delete('/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.delete');
 
         // Routes Questions
-        Route::get('/surveys/{survey}/questions/create', [AdminQuestionsController::class, 'buat'])->name('questions.buat');
-        Route::get('/surveys/questions', [AdminQuestionsController::class, 'store'])->name('questions.store');
-        Route::post('/surveys/{survey}/questions', [AdminQuestionsController::class, 'store'])->name('questions.store');
+        Route::get('/survey/{survey}/questions/create', [AdminQuestionsController::class, 'buat'])->name('questions.buat');
+        Route::get('/survey/questions', [AdminQuestionsController::class, 'store'])->name('questions.store');
+        Route::post('/survey/{survey}/questions', [AdminQuestionsController::class, 'store'])->name('questions.store');
 
 
 
         // Routes Survey Admin
-        Route::get('/surveys', [AdminSurveyController::class, 'index'])->name('surveys.index');
-        Route::get('/surveys/create', [AdminSurveyController::class, 'create'])->name('surveys.create');
-        Route::get('/surveys/{id}', [AdminSurveyController::class, 'show'])->name('surveys.show');
+        Route::get('/survey', [AdminSurveyController::class, 'index'])->name('surveys.index');
+        Route::get('/survey/create', [AdminSurveyController::class, 'create'])->name('surveys.create');
+        Route::get('/survey/{id}', [AdminSurveyController::class, 'show'])->name('surveys.show');
         Route::get('/survey/user', [AdminSurveyResponseController::class, 'index'])->name('survey.response.results');
-        Route::get('/surveys/{id}/edit', [SurveyController::class, 'edit'])->name('surveys.edit');
-        Route::put('/surveys/{id}', [SurveyController::class, 'update'])->name('surveys.update');
-        Route::post('/surveys', [AdminSurveyController::class, 'store'])->name('surveys.store');
-        Route::delete('/surveys/{id}', [SurveyController::class, 'destroy'])->name('surveys.destroy');
+        Route::get('/survey/{id}/edit', [SurveyController::class, 'edit'])->name('surveys.edit');
+        Route::put('/survey/{id}', [SurveyController::class, 'update'])->name('surveys.update');
+        Route::post('/survey', [AdminSurveyController::class, 'store'])->name('surveys.store');
+        Route::delete('/survey/{id}', [SurveyController::class, 'destroy'])->name('surveys.destroy');
     });
 });
