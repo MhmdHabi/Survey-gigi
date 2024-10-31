@@ -62,21 +62,6 @@ class DatabaseSeeder extends Seeder
                 'child_name' => 'Agus',
                 'birth_date' => fake()->date(),
             ]);
-
-            // Loop through each question and create response answers
-            foreach ($questions as $question) {
-                // Randomly choose an answer
-                $answer = Answer::where('question_id', $question->id)->inRandomOrder()->first();
-
-                // Create response answers for each question
-                ResponseAnswer::create([
-                    'survey_response_id' => $surveyResponse->id,
-                    'question_id' => $question->id,
-                    'answer_id' => $answer->id, // Assigning the correct answer ID
-                    'user_id' => $respondent->id,
-                    'text_response' => null, // Or provide a text response if applicable
-                ]);
-            }
         }
     }
 }

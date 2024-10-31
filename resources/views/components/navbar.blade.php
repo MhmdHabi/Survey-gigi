@@ -28,6 +28,16 @@
                     Artikel
                 </a>
             </li>
+            @auth
+
+                <li>
+                    <a href="{{ route('survey.results') }}"
+                        class=" uppercase font-[500] font-poppins 
+                          {{ request()->routeIs('artikel') ? 'border-b-2 border-[#5DB9FF]' : '' }}">
+                        Hasil Survey
+                    </a>
+                </li>
+            @endauth
         </ul>
 
         <!-- Login -->
@@ -94,6 +104,14 @@
                     class="text-gray-800 hover:text-blue-600 
                        {{ request()->routeIs('artikel') ? 'border-b-2 border-[#5DB9FF]' : '' }}">Artikel</a>
             </li>
+            @auth
+
+                <li><a href="{{ route('survey.results') }}"
+                        class="text-gray-800 hover:text-blue-600 
+                       {{ request()->routeIs('artikel') ? 'border-b-2 border-[#5DB9FF]' : '' }}">Hasil
+                        Survey</a>
+                </li>
+            @endauth
 
 
             <li>
