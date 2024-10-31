@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('title', 'Daftar Survei')
 
@@ -6,7 +6,7 @@
     <div class="container mx-auto mt-4">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-2xl font-bold">Daftar Survei</h2>
-            <a class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600" href="{{ route('surveys.tampil') }}">Buat
+            <a class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600" href="{{ route('surveys.create') }}">Buat
                 Survei</a>
         </div>
 

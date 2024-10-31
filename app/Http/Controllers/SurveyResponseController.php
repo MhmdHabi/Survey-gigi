@@ -96,7 +96,6 @@ class SurveyResponseController extends Controller
 
     public function results()
     {
-        // Mengambil data dari tabel survey_responses, bergabung dengan tabel surveys dan users
         $surveyResponses = SurveyResponse::where('user_id', auth()->id())
             ->join('surveys', 'survey_responses.survey_id', '=', 'surveys.id')
             ->join('users', 'survey_responses.user_id', '=', 'users.id') // Bergabung dengan tabel users

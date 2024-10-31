@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminQuestionsController;
+use App\Http\Controllers\Admin\SurveyController as AdminSurveyController;
+use App\Http\Controllers\Admin\SurveyResponseController as AdminSurveyResponseController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\AuthController;
@@ -38,31 +41,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/hasil-survey', [SurveyResponseController::class, 'results'])->name('survey.results');
 });
 // Menampilkan daftar survei
-Route::get('/surveys', [SurveyController::class, 'index'])->name('surveys.index');
-Route::get('/surveys/buat', [SurveyController::class, 'tampil'])->name('surveys.tampil');
 
 
 // Menampilkan detail survei
-Route::get('/surveys/{id}', [SurveyController::class, 'show'])->name('surveys.show');
 
-// Menampilkan form untuk mengedit survei
-Route::get('/surveys/{id}/edit', [SurveyController::class, 'edit'])->name('surveys.edit');
 
-// Mengupdate survei
-Route::put('/surveys/{id}', [SurveyController::class, 'update'])->name('surveys.update');
 
 
 // Menghapus survei
-Route::delete('/surveys/{id}', [SurveyController::class, 'destroy'])->name('surveys.destroy');
 
 // Jika Anda juga ingin menambahkan rute untuk membuat survei
 
 // Menyimpan survei baru
-Route::post('/surveys', [SurveyController::class, 'store'])->name('surveys.store');
 
 
-Route::get('/surveys/{survey}/questions/create', [QuestionController::class, 'create'])->name('questions.create');
-Route::post('/surveys/{survey}/questions', [QuestionController::class, 'store'])->name('questions.store');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/tentang-kami', [HomeController::class, 'about'])->name('about');
@@ -83,5 +75,22 @@ Route::prefix('admin')->group(function () {
         Route::get('/artikel/{id}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
         Route::put('/artikel/{id}', [ArtikelController::class, 'update'])->name('artikel.update');
         Route::delete('/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.delete');
+
+        // Routes Questions
+        Route::get('/surveys/{survey}/questions/create', [AdminQuestionsController::class, 'buat'])->name('questions.buat');
+        Route::get('/surveys/questions', [AdminQuestionsController::class, 'store'])->name('questions.store');
+        Route::post('/surveys/{survey}/questions', [AdminQuestionsController::class, 'store'])->name('questions.store');
+
+
+
+        // Routes Survey Admin
+        Route::get('/surveys', [AdminSurveyController::class, 'index'])->name('surveys.index');
+        Route::get('/surveys/create', [AdminSurveyController::class, 'create'])->name('surveys.create');
+        Route::get('/surveys/{id}', [AdminSurveyController::class, 'show'])->name('surveys.show');
+        Route::get('/survey/user', [AdminSurveyResponseController::class, 'index'])->name('survey.response.results');
+        Route::get('/surveys/{id}/edit', [SurveyController::class, 'edit'])->name('surveys.edit');
+        Route::put('/surveys/{id}', [SurveyController::class, 'update'])->name('surveys.update');
+        Route::post('/surveys', [AdminSurveyController::class, 'store'])->name('surveys.store');
+        Route::delete('/surveys/{id}', [SurveyController::class, 'destroy'])->name('surveys.destroy');
     });
 });

@@ -9,7 +9,9 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['survey_id', 'question_text', 'type'];
+    // In App\Models\Question
+    protected $fillable = ['question_text', 'type', 'survey_id', 'category_id'];
+
 
     public function survey()
     {
@@ -24,5 +26,11 @@ class Question extends Model
     public function answers()
     {
         return $this->hasMany(Answer::class);
+    }
+
+    // Question.php
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }
