@@ -6,15 +6,28 @@
     <section class="bg-gray-50 py-20 mt-10">
         <div class="container mx-auto flex justify-center">
             <div class="w-full max-w-sm">
-                <form class="bg-white shadow-md rounded px-8 py-6">
+                <form method="POST" action="{{ route('login.submit') }}" class="bg-white shadow-md rounded px-8 py-6">
+                    @csrf <!-- CSRF token for security -->
+
                     <h2 class="text-2xl font-bold text-center mb-6 text-[#5DB9FF]">Login</h2>
+
+                    @if ($errors->any())
+                        <div class="mb-4 text-red-500 text-sm">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-semibold mb-2" for="username">
-                            Username
+                        <label class="block text-gray-700 text-sm font-semibold mb-2" for="email">
+                            Email
                         </label>
-                        <input type="text" id="username" name="username" placeholder="Enter your username"
+                        <input type="email" id="email" name="email" placeholder="Enter your email"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            required />
+                            value="{{ old('email') }}" required />
                     </div>
 
                     <div class="mb-6">

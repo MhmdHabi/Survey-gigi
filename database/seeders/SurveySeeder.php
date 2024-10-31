@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Survey;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -14,12 +15,26 @@ class SurveySeeder extends Seeder
      */
     public function run()
     {
-        $surveys = Survey::factory(10)->create();
+        $survey = Survey::factory()->create();
 
-        foreach ($surveys as $survey) {
-            // Create 5 questions for each survey
-            Question::factory(5)->create([
-                'survey_id' => $survey->id, // Assuming your questions table has a survey_id foreign key
+        // Membuat 5 pertanyaan untuk survei ini
+        for ($i = 1; $i <= 5; $i++) {
+            $question = Question::factory()->create([
+                'survey_id' => $survey->id,
+                'question_text' => "Pernyataan $i",
+            ]);
+
+            // Menambahkan dua jawaban untuk setiap pertanyaan
+            Answer::factory()->create([
+                'question_id' => $question->id,
+                'answer_text' => 'Pernah',
+                'value' => 1,
+            ]);
+
+            Answer::factory()->create([
+                'question_id' => $question->id,
+                'answer_text' => 'Tidak Pernah',
+                'value' => 0,
             ]);
         }
     }

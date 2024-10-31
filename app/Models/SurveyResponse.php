@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SurveyResponse extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['survey_id', 'child_name', 'birth_date'];
+    protected $fillable = ['survey_id', 'child_name', 'birth_date', 'user_id'];
 
     public function survey()
     {
@@ -21,7 +22,7 @@ class SurveyResponse extends Model
         return $this->hasMany(ResponseAnswer::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

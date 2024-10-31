@@ -23,7 +23,8 @@ class SurveyResponseFactory extends Factory
             'survey_id' => \App\Models\Survey::factory(), // Associate with a survey
             'user_id' => \App\Models\User::factory(),
             'child_name' => $this->faker->name, // Generate a random name for the child
-            'birth_date' => $this->faker->date('Y-m-d', 'now'), // Generate a random birth date
+            'birth_date' => $this->faker->date('Y-m-d', 'now'),
+            'gender' => $this->faker->randomElement(['laki-laki', 'perempuan']), // Generate a random birth date
         ];
     }
 }

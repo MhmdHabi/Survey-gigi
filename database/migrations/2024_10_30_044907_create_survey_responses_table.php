@@ -16,7 +16,9 @@ return new class extends Migration
             $table->foreignId('survey_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('child_name');
+            $table->string('hasil')->nullable();
             $table->date('birth_date');
+            $table->enum('gender', ['laki-laki', 'perempuan']);
             $table->timestamps();
         });
     }

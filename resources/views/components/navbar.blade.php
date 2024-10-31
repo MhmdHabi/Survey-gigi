@@ -31,14 +31,33 @@
         </ul>
 
         <!-- Login -->
-        <a href="{{ route('login') }}"
-            class="relative hidden lg:inline-block px-6 py-1 border border-[#5DB9FF] text-[#5DB9FF] rounded-full overflow-hidden group">
-            <span
-                class="absolute inset-0 w-full h-full bg-[#5DB9FF] transform -translate-x-full transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
-            <span
-                class="relative z-10 transition-colors font-[500] font-poppins duration-300 ease-in-out group-hover:text-white">
-                Login</span>
-        </a>
+        @auth
+            <!-- User Avatar with Dropdown -->
+            <div class="relative">
+                <button id="user-menu"
+                    class="flex items-center justify-center w-10 h-10 rounded-full bg-[#5DB9FF] text-white focus:outline-none">
+                    <!-- Placeholder for user avatar -->
+                    <span class="font-semibold">{{ auth()->user()->name[0] }}</span>
+                </button>
+                <div id="dropdown" class="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg hidden">
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                        class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                        @csrf
+                    </form>
+                </div>
+            </div>
+        @else
+            <a href="{{ route('login') }}"
+                class="relative hidden lg:inline-block px-6 py-1 border border-[#5DB9FF] text-[#5DB9FF] rounded-full overflow-hidden group">
+                <span
+                    class="absolute inset-0 w-full h-full bg-[#5DB9FF] transform -translate-x-full transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
+                <span
+                    class="relative z-10 transition-colors font-[500] font-poppins duration-300 ease-in-out group-hover:text-white">
+                    Login</span>
+            </a>
+        @endauth
 
         <!-- Mobile Menu Button -->
         <button id="drawer-toggle" class="lg:hidden text-[#5DB9FF] focus:outline-none">
@@ -75,14 +94,35 @@
                     class="text-gray-800 hover:text-blue-600 
                        {{ request()->routeIs('artikel') ? 'border-b-2 border-[#5DB9FF]' : '' }}">Artikel</a>
             </li>
+
+
             <li>
-                <a href="{{ route('login') }}"
-                    class="relative inline-block px-6 py-1 border border-[#5DB9FF] text-black rounded-full overflow-hidden group">
-                    <span
-                        class="absolute inset-0 w-full h-full bg-[#5DB9FF] transform -translate-x-full transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
-                    <span
-                        class="relative z-10 transition-colors duration-300 ease-in-out group-hover:text-[#5DB9FF]">Login</span>
-                </a>
+                @auth
+                    <!-- User Avatar with Dropdown -->
+                    <div class="relative">
+                        <button id="user-menu"
+                            class="flex items-center justify-center w-10 h-10 rounded-full bg-[#5DB9FF] text-white focus:outline-none">
+                            <!-- Placeholder for user avatar -->
+                            <span class="font-semibold">{{ auth()->user()->name[0] }}</span>
+                        </button>
+                        <div id="dropdown" class="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg hidden">
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}"
+                        class="relative inline-block px-6 py-1 border border-[#5DB9FF] text-black rounded-full overflow-hidden group">
+                        <span
+                            class="absolute inset-0 w-full h-full bg-[#5DB9FF] transform -translate-x-full transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
+                        <span
+                            class="relative z-10 transition-colors duration-300 ease-in-out group-hover:text-[#5DB9FF]">Login</span>
+                    </a>
+                @endauth
             </li>
         </ul>
     </div>
@@ -102,7 +142,7 @@
             const timeElapsed = currentTime - startTime;
             const progress = Math.min(timeElapsed / duration, 1);
 
-            // Fungsi easing untuk efek halus
+            // Easing function for smooth effect
             const ease = progress < 0.5 ?
                 2 * progress * progress :
                 -1 + (4 - 2 * progress) * progress;
@@ -117,19 +157,19 @@
         requestAnimationFrame(animation);
     }
 
-    // Event listener untuk logo
+    // Event listener for logo
     document.getElementById('logo').addEventListener('click', function(e) {
-        e.preventDefault(); // Menghindari reload
+        e.preventDefault(); // Prevent reload
         smoothScroll(document.documentElement);
     });
 
-    // Kode drawer 
+    // Drawer code
     const drawer = document.getElementById('drawer');
     const drawerContent = document.getElementById('drawer-content');
 
     document.getElementById('drawer-toggle').addEventListener('click', function() {
         drawer.classList.remove('hidden');
-        drawerContent.offsetHeight;
+        drawerContent.offsetHeight; // Trigger reflow
         drawerContent.classList.remove('-translate-x-full');
         drawer.classList.add('opacity-100');
     });
@@ -140,5 +180,20 @@
         setTimeout(() => {
             drawer.classList.add('hidden');
         }, 300);
+    });
+
+    // User Dropdown Toggle
+    const userMenuButton = document.getElementById('user-menu');
+    const dropdown = document.getElementById('dropdown');
+
+    userMenuButton.addEventListener('click', function() {
+        dropdown.classList.toggle('hidden'); // Toggle visibility
+    });
+
+    // Close dropdown if clicking outside
+    document.addEventListener('click', function(event) {
+        if (!userMenuButton.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.classList.add('hidden');
+        }
     });
 </script>

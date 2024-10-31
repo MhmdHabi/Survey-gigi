@@ -2,6 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use App\Models\Survey;
+use App\Models\Question;
+use App\Models\Answer; // Pastikan Anda menambahkan ini
+use App\Models\SurveyResponse;
+use App\Models\ResponseAnswer;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,52 +17,66 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create 10 users
-        $users = \App\Models\User::factory(10)->create();
+        // Create 1 admin user
+        User::create([
+            'name' => 'Admin User',
+            'age' => 30,
+            'email' => 'admin@example.com',
+            'gender' => 'laki_laki', // or 'perempuan'
+            'role' => 'admin',
+            'password' => bcrypt('12345678'), // Secure password
+        ]);
 
-        // Create 10 surveys with 5 questions each
-        $surveys = \App\Models\Survey::factory(10)
-            ->create()
-            ->each(function ($survey) use ($users) {
-                // Create 5 questions for each survey
-                $questions = \App\Models\Question::factory(5)->create([
-                    'survey_id' => $survey->id,
+        // Create 1 regular user
+        User::create([
+            'name' => 'Regular User',
+            'age' => 25,
+            'email' => 'user@example.com',
+            'gender' => 'perempuan',
+            'role' => 'user',
+            'password' => bcrypt('12345678'),
+        ]);
+
+        // Create 5 users that will respond to surveys
+        $respondents = User::factory(5)->create();
+
+        // Create a survey with 5 questions
+        $survey = Survey::factory()->create();
+
+        // Create 5 questions for the survey
+        $questions = Question::factory(5)->create(['survey_id' => $survey->id]);
+
+        // Create answers for each question
+        foreach ($questions as $question) {
+            // Create answer options for the question
+            Answer::create(['question_id' => $question->id, 'answer_text' => 'Pernah', 'value' => 1, 'user_id' => 1]);
+            Answer::create(['question_id' => $question->id, 'answer_text' => 'Tidak Pernah', 'value' => 0, 'user_id' => 1]);
+        }
+
+        // Create survey responses for each respondent
+        foreach ($respondents as $respondent) {
+            // Create a survey response for the user
+            $surveyResponse = SurveyResponse::create([
+                'user_id' => $respondent->id,
+                'survey_id' => $survey->id,
+                'child_name' => 'Agus',
+                'birth_date' => fake()->date(),
+            ]);
+
+            // Loop through each question and create response answers
+            foreach ($questions as $question) {
+                // Randomly choose an answer
+                $answer = Answer::where('question_id', $question->id)->inRandomOrder()->first();
+
+                // Create response answers for each question
+                ResponseAnswer::create([
+                    'survey_response_id' => $surveyResponse->id,
+                    'question_id' => $question->id,
+                    'answer_id' => $answer->id, // Assigning the correct answer ID
+                    'user_id' => $respondent->id,
+                    'text_response' => null, // Or provide a text response if applicable
                 ]);
-
-                // Optionally, you can create answers for each question
-                foreach ($questions as $question) {
-                    // Assuming you want to create multiple choice answers
-                    \App\Models\Answer::factory(3)->create([
-                        'question_id' => $question->id,
-                    ]);
-                }
-            });
-
-        // Create 10 survey responses with associated response answers
-        \App\Models\SurveyResponse::factory(10)
-            ->create()
-            ->each(function ($response) {
-                // For each survey response, create responses for each question in the associated survey
-                $questions = $response->survey->questions;
-
-                foreach ($questions as $question) {
-                    // Assuming you want to randomly associate an answer
-                    $answer = $question->answers->random();
-
-                    // Create a response answer for each question
-                    \App\Models\ResponseAnswer::factory()->create([
-                        'survey_response_id' => $response->id,
-                        'question_id' => $question->id,
-                        'answer_id' => $answer->id, // Associate with a specific answer
-                        'text_response' => $this->getSampleTextResponse($question->type),
-                    ]);
-                }
-            });
-    }
-
-    private function getSampleTextResponse($type)
-    {
-        // Generate sample text responses based on question type
-        return $type === 'multiple_choice' ? null : \Faker\Factory::create()->sentence;
+            }
+        }
     }
 }

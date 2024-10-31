@@ -5,90 +5,46 @@
 @section('content')
     <section class="mt-16 py-10 pb-7 lg:py-16 px-8 lg:px-16 bg-gray-50 flex justify-center items-center min-h-screen">
         <div class="w-full max-w-3xl bg-white p-8 rounded-lg shadow-md">
-            <h1 class="text-2xl font-semibold text-center mb-6">Survey Pemberian Susu Formula</h1>
+            <h1 class="text-2xl font-semibold text-center mb-6">{{ $survey->title }}</h1>
 
-            <form action="#" method="POST">
-                <!-- Pertanyaan 1 -->
+            <form action="{{ route('surveys.submit', $survey->id) }}" method="POST">
+                @csrf
+
                 <div class="mb-4">
-                    <p class="text-lg font-medium">1. Apakah Anda saat ini memberikan susu formula kepada anak Anda?</p>
-                    <div class="flex gap-4 mt-2">
-                        <label class="flex items-center border rounded-full px-4 py-2 cursor-pointer hover:bg-blue-50">
-                            <input type="radio" id="q1-yes" name="q1" value="Iya" class="mr-2">
-                            <span class="text-gray-700 font-medium">Iya</span>
-                        </label>
-                        <label class="flex items-center border rounded-full px-4 py-2 cursor-pointer hover:bg-blue-50">
-                            <input type="radio" id="q1-no" name="q1" value="Tidak" class="mr-2">
-                            <span class="text-gray-700 font-medium">Tidak</span>
-                        </label>
-                    </div>
+                    <label for="child_name" class="block text-gray-700">Nama Anak</label>
+                    <input type="text" id="child_name" name="child_name" placeholder="Nama Anak" required
+                        class="w-full p-2 border rounded">
                 </div>
 
-                <!-- Pertanyaan 2 -->
                 <div class="mb-4">
-                    <p class="text-lg font-medium">2. Apakah Anda pernah berkonsultasi dengan dokter sebelum memilih susu
-                        formula?</p>
-                    <div class="flex gap-4 mt-2">
-                        <label class="flex items-center border rounded-full px-4 py-2 cursor-pointer hover:bg-blue-50">
-                            <input type="radio" id="q2-yes" name="q2" value="Iya" class="mr-2">
-                            <span class="text-gray-700 font-medium">Iya</span>
-                        </label>
-                        <label class="flex items-center border rounded-full px-4 py-2 cursor-pointer hover:bg-blue-50">
-                            <input type="radio" id="q2-no" name="q2" value="Tidak" class="mr-2">
-                            <span class="text-gray-700 font-medium">Tidak</span>
-                        </label>
-                    </div>
+                    <label for="birth_date" class="block text-gray-700">Tanggal Lahir</label>
+                    <input type="date" id="birth_date" name="birth_date" required class="w-full p-2 border rounded">
                 </div>
 
-                <!-- Pertanyaan 3 -->
                 <div class="mb-4">
-                    <p class="text-lg font-medium">3. Apakah Anda membaca komposisi nutrisi pada kemasan susu formula?</p>
-                    <div class="flex gap-4 mt-2">
-                        <label class="flex items-center border rounded-full px-4 py-2 cursor-pointer hover:bg-blue-50">
-                            <input type="radio" id="q3-yes" name="q3" value="Iya" class="mr-2">
-                            <span class="text-gray-700 font-medium">Iya</span>
-                        </label>
-                        <label class="flex items-center border rounded-full px-4 py-2 cursor-pointer hover:bg-blue-50">
-                            <input type="radio" id="q3-no" name="q3" value="Tidak" class="mr-2">
-                            <span class="text-gray-700 font-medium">Tidak</span>
-                        </label>
-                    </div>
+                    <label for="gender" class="block text-gray-700">Jenis Kelamin</label>
+                    <select id="gender" name="gender" required class="w-full p-2 border rounded">
+                        <option value="laki-laki">Laki-laki</option>
+                        <option value="perempuan">Perempuan</option>
+                    </select>
                 </div>
 
-                <!-- Pertanyaan 4 -->
-                <div class="mb-4">
-                    <p class="text-lg font-medium">4. Apakah Anda mempertimbangkan usia anak saat memilih susu formula?</p>
-                    <div class="flex gap-4 mt-2">
-                        <label class="flex items-center border rounded-full px-4 py-2 cursor-pointer hover:bg-blue-50">
-                            <input type="radio" id="q4-yes" name="q4" value="Iya" class="mr-2">
-                            <span class="text-gray-700 font-medium">Iya</span>
-                        </label>
-                        <label class="flex items-center border rounded-full px-4 py-2 cursor-pointer hover:bg-blue-50">
-                            <input type="radio" id="q4-no" name="q4" value="Tidak" class="mr-2">
-                            <span class="text-gray-700 font-medium">Tidak</span>
-                        </label>
+                <!-- Loop for displaying questions and answers -->
+                @foreach ($questions as $question)
+                    <div class="mb-4">
+                        <p class="font-semibold">{{ $question->question_text }}</p>
+                        @foreach ($question->answers as $answer)
+                            <label class="block">
+                                <input type="checkbox" name="answers[]" value="{{ $answer->id }}" class="mr-2">
+                                {{ $answer->answer_text }}
+                            </label>
+                        @endforeach
                     </div>
-                </div>
+                @endforeach
 
-                <!-- Pertanyaan 5 -->
-                <div class="mb-6">
-                    <p class="text-lg font-medium">5. Apakah anak Anda memiliki alergi terhadap bahan tertentu dalam susu
-                        formula?</p>
-                    <div class="flex gap-4 mt-2">
-                        <label class="flex items-center border rounded-full px-4 py-2 cursor-pointer hover:bg-blue-50">
-                            <input type="radio" id="q5-yes" name="q5" value="Iya" class="mr-2">
-                            <span class="text-gray-700 font-medium">Iya</span>
-                        </label>
-                        <label class="flex items-center border rounded-full px-4 py-2 cursor-pointer hover:bg-blue-50">
-                            <input type="radio" id="q5-no" name="q5" value="Tidak" class="mr-2">
-                            <span class="text-gray-700 font-medium">Tidak</span>
-                        </label>
-                    </div>
-                </div>
-
-                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg font-medium hover:bg-blue-600">
-                    Kirim Jawaban
-                </button>
+                <button type="submit" class="w-full bg-blue-500 text-white rounded py-2">Kirim Jawaban</button>
             </form>
+
         </div>
     </section>
 @endsection

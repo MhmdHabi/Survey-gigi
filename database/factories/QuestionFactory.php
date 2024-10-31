@@ -2,7 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Answer;
 use App\Models\Question;
+use App\Models\Survey;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,9 +23,14 @@ class QuestionFactory extends Factory
     public function definition(): array
     {
         return [
-            'question_text' => $this->faker->sentence, // Generate a random question
-            'type' => $this->faker->randomElement(['multiple_choice', 'text']), // Random type
-            'survey_id' => \App\Models\Survey::factory(), // Associate with a survey
+            'survey_id' => Survey::factory(), // Relasi dengan survei
+            'question_text' => $this->faker->sentence,
         ];
     }
+
+    /**
+     * Define the model's default state with answers.
+     *
+     * @return Question
+     */
 }

@@ -23,7 +23,8 @@ class ResponseAnswerFactory extends Factory
             'survey_response_id' => \App\Models\SurveyResponse::factory(), // Associate with a survey response
             'question_id' => \App\Models\Question::factory(), // Associate with a question
             'answer_id' => \App\Models\Answer::factory(), // Assuming the response is a text answer
-            'text_response' => $this->faker->word, // Assuming the response is a text answer
+            'text_response' => $this->faker->word,
+            'user_id' => \App\Models\User::factory(),
             // Add other fields as necessary
         ];
     }

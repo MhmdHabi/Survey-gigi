@@ -15,24 +15,44 @@
             <thead>
                 <tr class="bg-gray-200 text-gray-700">
                     <th class="py-2 px-4 border-b">Pertanyaan</th>
-                    <th class="py-2 px-4 border-b">Tipe</th>
                     <th class="py-2 px-4 border-b">Jawaban</th>
+                    <th class="py-2 px-4 border-b">Response Count</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($survey->questions as $question)
                     <tr class="hover:bg-gray-100">
                         <td class="py-2 px-4 border-b">{{ $question->question_text }}</td>
-                        <td class="py-2 px-4 border-b">{{ $question->type }}</td>
                         <td class="py-2 px-4 border-b">
                             @if ($question->type === 'multiple_choice')
                                 <ul class="list-disc pl-5">
                                     @foreach ($question->answers as $answer)
-                                        <li>{{ $answer->answer_text }}</li>
+                                        <li>
+                                            {{ $answer->answer_text }}
+                                            ({{ $answer->response_count }})
+                                        </li>
                                     @endforeach
                                 </ul>
                             @else
                                 <p class="italic">Tidak ada pilihan jawaban.</p>
+                            @endif
+                        </td>
+                        <td class="py-2 px-4 border-b">
+                            @if ($question->type === 'multiple_choice')
+                                @php
+                                    // Calculate the score based on responses
+                                    $totalResponses = $question->answers->sum('response_count');
+                                    $points = $question->answers->sum(function ($answer) {
+                                        return $answer->response_count * ($answer->answer_text === 'Selalu' ? 1 : 0);
+                                    });
+                                    $score = $totalResponses ? ($points / $totalResponses) * 100 : 0;
+                                @endphp
+                                {{ round($score, 2) }} %
+                                <p class="text-sm text-gray-500">
+                                    Ket: J = Jumlah point soal, T = Total soal. Rumus: J/T x 100 = skor %
+                                </p>
+                            @else
+                                <p class="italic">Tidak ada respon.</p>
                             @endif
                         </td>
                     </tr>

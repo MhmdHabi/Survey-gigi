@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('survey_id')->constrained()->onDelete('cascade');
             $table->string('question_text');
-            $table->enum('type', ['text', 'multiple_choice']);
+            $table->enum('type', ['multiple_choice']);
             $table->timestamps();
         });
     }

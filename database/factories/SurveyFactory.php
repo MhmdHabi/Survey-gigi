@@ -22,9 +22,9 @@ class SurveyFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence, // Generate a random title
-            'description' => $this->faker->paragraph, // Generate a random description
-            // Add other fields as necessary
+            'title' => $this->faker->sentence,
+            'description' => $this->faker->paragraph,
+
         ];
     }
 }

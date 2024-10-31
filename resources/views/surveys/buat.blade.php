@@ -23,21 +23,19 @@
                     <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                         name="questions[0][question_text]" required>
 
-                    <label for="type" class="block text-sm font-medium text-gray-700 mt-2">Tipe Pertanyaan</label>
-                    <select name="questions[0][type]"
-                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md question-type">
-                        <option value="multiple_choice">Pilihan Ganda</option>
-                        <option value="text">Teks</option>
-                    </select>
-
-                    <div class="answers-container mt-2">
-                        <label for="answers" class="block text-sm font-medium text-gray-700">Jawaban (Pisahkan dengan koma,
-                            jika pilihan ganda)</label>
-                        <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                            name="questions[0][answers][]" required>
+                    <h5 class="mt-2 font-medium">Jawaban</h5>
+                    <div class="answers-container">
+                        <div class="flex items-center mt-2">
+                            <input type="radio" class="mr-2" name="questions[0][selected_answer]" value="Pernah"
+                                required>
+                            <label class="block text-sm font-medium text-gray-700">Pernah</label>
+                        </div>
+                        <div class="flex items-center mt-2">
+                            <input type="radio" class="mr-2" name="questions[0][selected_answer]" value="Tidak Pernah"
+                                required>
+                            <label class="block text-sm font-medium text-gray-700">Tidak Pernah</label>
+                        </div>
                     </div>
-                    <button type="button"
-                        class="mt-2 bg-red-500 text-white font-semibold py-1 px-3 rounded removeQuestion">Hapus</button>
                 </div>
             </div>
 
@@ -53,41 +51,32 @@
             const questionsContainer = document.getElementById('questionsContainer');
             const index = questionsContainer.children.length;
             const questionHTML = `
-            <div class="mb-4 question">
-                <label for="question_text" class="block text-sm font-medium text-gray-700">Pertanyaan</label>
-                <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" name="questions[${index}][question_text]" required>
-                
-                <label for="type" class="block text-sm font-medium text-gray-700 mt-2">Tipe Pertanyaan</label>
-                <select name="questions[${index}][type]" class="mt-1 block w-full p-2 border border-gray-300 rounded-md question-type">
-                    <option value="multiple_choice">Pilihan Ganda</option>
-                    <option value="text">Teks</option>
-                </select>
+        <div class="mb-4 question">
+            <label for="question_text" class="block text-sm font-medium text-gray-700">Pertanyaan</label>
+            <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" name="questions[${index}][question_text]" required>
 
-                <div class="answers-container mt-2">
-                    <label for="answers" class="block text-sm font-medium text-gray-700">Jawaban (Pisahkan dengan koma, jika pilihan ganda)</label>
-                    <input type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" name="questions[${index}][answers][]" required>
+            <h5 class="mt-2 font-medium">Jawaban</h5>
+            <div class="answers-container">
+                <div class="flex items-center mt-2">
+                    <input type="radio" class="mr-2" name="questions[${index}][selected_answer]" value="Pernah" required>
+                    <label class="block text-sm font-medium text-gray-700">Pernah</label>
                 </div>
-                <button type="button" class="mt-2 bg-red-500 text-white font-semibold py-1 px-3 rounded removeQuestion">Hapus</button>
-            </div>`;
+                <div class="flex items-center mt-2">
+                    <input type="radio" class="mr-2" name="questions[${index}][selected_answer]" value="Tidak Pernah" required>
+                    <label class="block text-sm font-medium text-gray-700">Tidak Pernah</label>
+                </div>
+            </div>
+            <button type="button" class="mt-2 bg-red-500 text-white font-semibold py-1 px-3 rounded removeQuestion">Hapus</button>
+        </div>`;
             questionsContainer.insertAdjacentHTML('beforeend', questionHTML);
         });
 
         document.addEventListener('click', function(e) {
+            // Remove question
             if (e.target.classList.contains('removeQuestion')) {
                 e.target.closest('.question').remove();
             }
         });
-
-        document.addEventListener('change', function(e) {
-            if (e.target.classList.contains('question-type')) {
-                const answersContainer = e.target.closest('.question').querySelector('.answers-container');
-                if (e.target.value === 'multiple_choice') {
-                    answersContainer.style.display = 'block'; // Show answers container for multiple choice
-                } else {
-                    answersContainer.style.display = 'none'; // Hide answers container for text type
-                    answersContainer.querySelector('input').value = ''; // Clear input if type changes to text
-                }
-            }
-        });
     </script>
+
 @endsection

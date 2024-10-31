@@ -1,26 +1,36 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Seeders;
 
+use App\Models\Survey;
+use App\Models\Question;
 use App\Models\Answer;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Seeder;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Answer>
- */
-class AnswerFactory extends Factory
+class SurveySeeder extends Seeder
 {
-    protected $model = Answer::class;
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    public function run()
     {
-        return [
-            'answer_text' => $this->faker->word, // Generate a random answer
-            'question_id' => \App\Models\Question::factory(), // Associate with a question
-        ];
+        $survey = Survey::factory()->create();
+
+        // Buat 5 pertanyaan untuk survei ini
+        $questions = Question::factory(5)->create([
+            'survey_id' => $survey->id,
+        ]);
+
+        // Tambahkan dua jawaban untuk setiap pertanyaan
+        foreach ($questions as $question) {
+            Answer::factory()->create([
+                'question_id' => $question->id,
+                'answer_text' => 'Pernah',
+                'value' => 1,
+            ]);
+
+            Answer::factory()->create([
+                'question_id' => $question->id,
+                'answer_text' => 'Tidak Pernah',
+                'value' => 0,
+            ]);
+        }
     }
 }

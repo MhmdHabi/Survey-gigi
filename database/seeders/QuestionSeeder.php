@@ -18,7 +18,7 @@ class QuestionSeeder extends Seeder
 
         foreach ($questions as $question) {
             // Create 10 responses for each question
-            Answer::factory(10)->create([
+            Answer::factory(2)->create([
                 'question_id' => $question->id, // Assuming your answers table has a question_id foreign key
             ]);
         }

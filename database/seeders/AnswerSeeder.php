@@ -16,9 +16,8 @@ class AnswerSeeder extends Seeder
         $questionId = 1; // ID Pertanyaan pertama
 
         Answer::insert([
-            ['question_id' => $questionId, 'answer_text' => 'Ya, setiap hari'],
-            ['question_id' => $questionId, 'answer_text' => 'Kadang-kadang'],
-            ['question_id' => $questionId, 'answer_text' => 'Tidak pernah']
+            ['question_id' => $questionId, 'answer_text' => 'Pernah'],
+            ['question_id' => $questionId, 'answer_text' => 'Tidak Pernah'],
         ]);
     }
 }

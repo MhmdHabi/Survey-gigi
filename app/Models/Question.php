@@ -16,6 +16,11 @@ class Question extends Model
         return $this->belongsTo(Survey::class);
     }
 
+    public function getResponsesCountAttribute()
+    {
+        return $this->responses()->count();
+    }
+
     public function answers()
     {
         return $this->hasMany(Answer::class);
