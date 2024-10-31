@@ -12,30 +12,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- AOS CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css" />
-<<<<<<< HEAD
     <title>Survey Gigi</title>
-=======
-</head>
-<title>Survey Gigi</title>
-
-<style>
-    .truncate-deskripsi {
-        display: -webkit-box;
-
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-
-        overflow: hidden;
-
-        text-overflow: ellipsis;
-
-        line-height: 1.5;
-
-        max-height: 3em;
-
-    }
-</style>
->>>>>>> 51de335832cc8e836b143e8e16bc7a4456a2a379
 </head>
 
 

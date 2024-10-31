@@ -16,6 +16,24 @@
             </a>
         </li>
         <li>
+            <a href="{{ route('surveys.index') }}"
+                class="flex items-center py-2 px-4 text-gray-800 hover:bg-[#5DB9FF] hover:text-white sidebar-item 
+                {{ request()->is('admin/surveys') ? 'bg-[#5DB9FF] text-white' : '' }}"
+                id="usersLink">
+                <i class="fas fa-users mr-2"></i>
+                <span class="sidebar-text">Survey</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('survey.response.results') }}"
+                class="flex items-center py-2 px-4 text-gray-800 hover:bg-[#5DB9FF] hover:text-white sidebar-item 
+                {{ request()->is('admin/survey/user') ? 'bg-[#5DB9FF] text-white' : '' }}"
+                id="usersLink">
+                <i class="fas fa-users mr-2"></i>
+                <span class="sidebar-text">User Survey</span>
+            </a>
+        </li>
+        <li>
             <a href="#"
                 class="flex items-center py-2 px-4 text-gray-800 hover:bg-[#5DB9FF] hover:text-white sidebar-item 
                 {{ request()->is('admin/users') ? 'bg-[#5DB9FF] text-white' : '' }}"

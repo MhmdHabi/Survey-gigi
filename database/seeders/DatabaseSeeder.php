@@ -17,6 +17,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+        $categories = [
+            ['name' => 'Kesehatan'],
+            ['name' => 'Pendidikan'],
+            ['name' => 'Sosial'],
+        ];
+
+        foreach ($categories as $category) {
+            \App\Models\Category::create($category);
+        }
         // Create 1 admin user
         User::create([
             'name' => 'Admin User',
@@ -37,17 +47,24 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('12345678'),
         ]);
 
+
         // Create 5 users that will respond to surveys
         $respondents = User::factory(5)->create();
 
         // Create a survey with 5 questions
         $survey = Survey::factory()->create();
+        $categoriesCount = \App\Models\Category::count();
 
         // Create 5 questions for the survey
-        $questions = Question::factory(5)->create(['survey_id' => $survey->id]);
+        for ($i = 0; $i < 5; $i++) {
+            Question::factory()->create([
+                'survey_id' => $survey->id,
+                'category_id' => rand(1, $categoriesCount), // Random category_id
+            ]);
+        }
 
         // Create answers for each question
-        foreach ($questions as $question) {
+        foreach ($survey->questions as $question) {
             // Create answer options for the question
             Answer::create(['question_id' => $question->id, 'answer_text' => 'Pernah', 'value' => 1, 'user_id' => 1]);
             Answer::create(['question_id' => $question->id, 'answer_text' => 'Tidak Pernah', 'value' => 0, 'user_id' => 1]);
