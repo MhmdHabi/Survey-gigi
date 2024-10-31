@@ -22,20 +22,19 @@
             <h2 class="text-xl lg:text-2xl font-semibold text-white">Daftar Artikel</h2>
             <div class="flex space-x-2 items-center">
                 <a href="{{ route('artikel.add') }}"
-                    class="bg-orange-500 text-white px-4 py-2 md:text-md lg:text-lg rounded flex items-center">
+                    class="bg-orange-500 text-white px-4 py-2 text-md rounded flex items-center">
                     <i class="fas fa-plus mr-2"></i>
                     Tambah Artikel
                 </a>
-                <a href=""
-                    class="bg-yellow-500 text-white px-4 py-2 md:text-md lg:text-lg rounded flex items-center">
+                <a href="" class="bg-yellow-500 text-white px-4 py-2 text-md rounded flex items-center">
                     <i class="fas fa-file-pdf mr-2"></i>
                     Export PDF
                 </a>
-                <a href="" class="bg-green-500 text-white px-4 py-2 md:text-md lg:text-lg rounded flex items-center">
+                <a href="" class="bg-green-500 text-white px-4 py-2 text-md rounded flex items-center">
                     <i class="fas fa-file-csv mr-2"></i>
                     Export CSV
                 </a>
-                <a href="" class="bg-gray-700 text-white px-4 py-2 md:text-md lg:text-lg rounded flex items-center">
+                <a href="" class="bg-gray-700 text-white px-4 py-2 text-md rounded flex items-center">
                     <i class="fas fa-file-excel mr-2"></i>
                     Export Excel
                 </a>

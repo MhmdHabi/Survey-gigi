@@ -113,6 +113,6 @@ class ArtikelController extends Controller
         $artikel = Artikel::findOrFail($id);
         $artikel->delete();
 
-        return redirect()->route('artikel')->with('success', 'Artikel berhasil dihapus.');
+        return redirect()->route('admin.artikel')->with('success', 'Artikel berhasil dihapus.');
     }
 }
