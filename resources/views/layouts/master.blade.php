@@ -12,6 +12,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- AOS CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css" />
+<<<<<<< HEAD
+    <title>Survey Gigi</title>
+=======
 </head>
 <title>Survey Gigi</title>
 
@@ -26,27 +29,31 @@
         max-height: 3em;
     }
 </style>
+>>>>>>> 51de335832cc8e836b143e8e16bc7a4456a2a379
 </head>
 
-<body>
 
-    <body class="bg-gray-100 flex flex-col min-h-screen font-poppins">
-        <!-- Include Navbar -->
-        @include('components.navbar')
 
-        <!-- Main Content -->
-        <main class="container mx-auto flex-grow">
-            @yield('content')
-        </main>
+<body class="bg-gray-100 flex flex-col min-h-screen font-poppins">
 
-        <!-- Footer -->
-        @include('components.footer')
-    </body>
 
-    <!-- AOS JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
+
+    <!-- Include Navbar -->
+    @include('components.navbar')
+
+    <!-- Main Content -->
+    <main class="container mx-auto flex-grow">
+        @yield('content')
+    </main>
+
+    <!-- Footer -->
+    @include('components.footer')
+</body>
+
+<!-- AOS JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 
 </html>
