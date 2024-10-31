@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\AuthAdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -33,8 +34,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-    Route::post('/surveys/survey-susu-formula/{id}/submit', [SurveyResponseController::class, 'submit'])->name('surveys.submit');
-    Route::get('/survey-results', [SurveyResponseController::class, 'results'])->name('survey.results');
+    Route::post('/survey/survey-susu-formula/{id}/submit', [SurveyResponseController::class, 'submit'])->name('surveys.submit');
+    Route::get('/hasil-survey', [SurveyResponseController::class, 'results'])->name('survey.results');
 });
 // Menampilkan daftar survei
 Route::get('/surveys', [SurveyController::class, 'index'])->name('surveys.index');
@@ -74,6 +75,7 @@ Route::get('/survey-pola-asuh', [SurveyController::class, 'asuh'])->name('asuh')
 Route::prefix('admin')->group(function () {
     // CRUD Mahasiswa
     Route::prefix('/')->group(function () {
+        Route::get('/login', [AuthAdminController::class, 'index'])->name('admin.login');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('/artikel', [ArtikelController::class, 'artikel'])->name('admin.artikel');
         Route::get('/artikel/add', [ArtikelController::class, 'create'])->name('artikel.add');

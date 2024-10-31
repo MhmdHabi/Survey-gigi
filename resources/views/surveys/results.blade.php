@@ -3,7 +3,7 @@
 @section('title', 'Hasil Survei')
 
 @section('content')
-    <div class="container mx-auto mt-4">
+    <div class="mt-16 py-16 px-8 md:px-16 bg-gray-50">
         <h2 class="text-2xl font-bold">Hasil Survei</h2>
 
         @if (session('success'))

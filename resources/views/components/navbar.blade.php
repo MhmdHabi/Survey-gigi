@@ -2,7 +2,7 @@
     <div class="container mx-auto flex justify-between items-center">
         <!-- Logo -->
         <a href="{{ route('home') }}" id="logo">
-            <img src="assets/nav-logo.png" alt="My App Logo" class="h-10 lg:h-12">
+            <img src="{{ asset('assets/nav-logo.png') }}" alt="My App Logo" class="h-10 lg:h-12">
         </a>
 
         <!-- Desktop Menu -->
@@ -33,7 +33,7 @@
                 <li>
                     <a href="{{ route('survey.results') }}"
                         class=" uppercase font-[500] font-poppins 
-                          {{ request()->routeIs('artikel') ? 'border-b-2 border-[#5DB9FF]' : '' }}">
+                          {{ request()->routeIs('survey.results') ? 'border-b-2 border-[#5DB9FF]' : '' }}">
                         Hasil Survey
                     </a>
                 </li>

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9c491b8531eec05ba41a11d9276a5749",
+    "content-hash": "7a760610a205d5a6fea4ff12adda32b4",
     "packages": [
         {
             "name": "brick/math",
@@ -5390,6 +5390,76 @@
             "time": "2023-12-08T13:03:43+00:00"
         },
         {
+            "name": "tonysm/turbo-laravel",
+            "version": "1.12.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hotwired-laravel/turbo-laravel.git",
+                "reference": "8dc043ad8b8a9cc4a71aecddf0ed1ce0544f4a42"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hotwired-laravel/turbo-laravel/zipball/8dc043ad8b8a9cc4a71aecddf0ed1ce0544f4a42",
+                "reference": "8dc043ad8b8a9cc4a71aecddf0ed1ce0544f4a42",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^8.47|^9.0|^10.0",
+                "php": "^8.0|^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.24|^7.0|^8.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "\\Tonysm\\TurboLaravel\\TurboServiceProvider"
+                    ],
+                    "aliases": {
+                        "Turbo": "\\Tonysm\\TurboLaravel\\Facades\\Turbo",
+                        "TurboStream": "\\Tonysm\\TurboLaravel\\Facades\\TurboStream"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php",
+                    "src/globals.php"
+                ],
+                "psr-4": {
+                    "Tonysm\\TurboLaravel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tony Messias",
+                    "email": "tonysm@hey.com",
+                    "homepage": "https://tonysm.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Turbo Laravel gives you a set of conventions to make the most out of the Hotwire stack (inspired by turbo-rails gem).",
+            "homepage": "https://github.com/tonysm/turbo-laravel",
+            "keywords": [
+                "hotwire",
+                "hotwired",
+                "turbo",
+                "turbo-laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/hotwired-laravel/turbo-laravel/issues",
+                "source": "https://github.com/hotwired-laravel/turbo-laravel/tree/1.12.2"
+            },
+            "abandoned": "hotwired/turbo-laravel",
+            "time": "2023-05-13T16:36:59+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v5.6.1",
             "source": {
@@ -5860,16 +5930,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.37.0",
+            "version": "v1.37.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "5d385f2e698f0f774cdead82aff5d989fb95309b"
+                "reference": "7efa151ea0d16f48233d6a6cd69f81270acc6e93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/5d385f2e698f0f774cdead82aff5d989fb95309b",
-                "reference": "5d385f2e698f0f774cdead82aff5d989fb95309b",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/7efa151ea0d16f48233d6a6cd69f81270acc6e93",
+                "reference": "7efa151ea0d16f48233d6a6cd69f81270acc6e93",
                 "shasum": ""
             },
             "require": {
@@ -5919,7 +5989,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2024-10-21T17:13:38+00:00"
+            "time": "2024-10-29T20:18:14+00:00"
         },
         {
             "name": "mockery/mockery",
