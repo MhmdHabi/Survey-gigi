@@ -3,11 +3,15 @@
 @section('title', 'Register')
 
 @section('content')
-    <div class="container mx-auto py-10">
-        <h2 class="text-2xl font-bold text-center mb-8">Register</h2>
+    <div class="container mx-auto py-20 mt-10 px-8">
 
         <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
+<<<<<<< HEAD
             <form action="{{ route('register') }}" method="POST">
+=======
+            <h2 class="text-2xl text-[#5DB9FF] font-bold text-center mb-8">Register</h2>
+            <form action="" method="POST">
+>>>>>>> 51de335832cc8e836b143e8e16bc7a4456a2a379
                 @csrf
 
                 <div class="mb-4">

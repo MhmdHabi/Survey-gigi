@@ -3,7 +3,7 @@
 @section('title', 'Login')
 
 @section('content')
-    <section class="bg-gray-50 py-20 mt-10">
+    <section class="bg-gray-50 px-8 py-20 mt-10">
         <div class="container mx-auto flex justify-center">
             <div class="w-full max-w-sm">
                 <form method="POST" action="{{ route('login.submit') }}" class="bg-white shadow-md rounded px-8 py-6">
@@ -50,7 +50,7 @@
                 <p class="text-center mt-4 text-gray-600">
                     Don't have an account?
                     <a href="{{ route('register') }}" class="text-[#5DB9FF] hover:underline">
-                        Register here
+                        Register
                     </a>
                 </p>
             </div>

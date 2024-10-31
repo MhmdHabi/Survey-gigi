@@ -1,13 +1,13 @@
 <section class="bg-blue-50 py-12 lg:py-20">
     <div class="container mx-auto flex flex-col lg:flex-row items-center px-16">
         <!-- Image -->
-        <div class="lg:w-1/2 mt-8 lg:mt-0 flex justify-center order-1 lg:order-2" data-aos="fade-left"
+        <div class="lg:w-2/5 mt-8 lg:mt-0 flex justify-center order-1 lg:order-2" data-aos="fade-left"
             data-aos-duration="1000" data-aos-easing="ease-in-out">
             <img src="{{ asset('assets/hero-image.png') }}" alt="Dental Health" class="w-full h-auto max-w-lg">
         </div>
 
         <!-- Description -->
-        <div class="lg:w-1/2 text-center lg:text-left order-2 lg:order-1 px-20 lg:px-0 mt-3 lg:mt-0"
+        <div class="lg:w-3/5 text-center lg:text-left order-2 lg:order-1 px-20 lg:px-0 mt-3 lg:mt-0"
             data-aos="fade-right" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="200">
             <h1 class="text-5xl font-bold text-black">
                 Sempurnakan <span class="text-[#5DB9FF]">Senyum</span>
