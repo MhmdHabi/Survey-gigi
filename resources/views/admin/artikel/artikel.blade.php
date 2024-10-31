@@ -3,7 +3,8 @@
 @section('content')
     {{-- Notifikasi Sukses --}}
     @if (session('success'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4 shadow-md"
+            role="alert">
             <strong class="font-bold">Sukses!</strong>
             <span class="block sm:inline">{{ session('success') }}</span>
         </div>
@@ -11,30 +12,34 @@
 
     {{-- Notifikasi Error --}}
     @if (session('error'))
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4 shadow-md" role="alert">
             <strong class="font-bold">Error!</strong>
             <span class="block sm:inline">{{ session('error') }}</span>
         </div>
     @endif
-    <div class="bg-[#5DB9FF] p-6 rounded-lg">
 
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl lg:text-2xl font-semibold text-white">Daftar Artikel</h2>
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-semibold text-gray-800">Daftar Artikel</h2>
             <div class="flex space-x-2 items-center">
                 <a href="{{ route('artikel.add') }}"
-                    class="bg-orange-500 text-white px-4 py-2 text-md rounded flex items-center">
+                    class="bg-orange-500 text-white px-4 py-2 rounded-md flex items-center transition duration-300 hover:bg-orange-600">
                     <i class="fas fa-plus mr-2"></i>
                     Tambah Artikel
                 </a>
-                <a href="" class="bg-yellow-500 text-white px-4 py-2 text-md rounded flex items-center">
+                <a href=""
+                    class="bg-yellow-500 text-white px-4 py-2 rounded-md flex items-center transition duration-300 hover:bg-yellow-600">
                     <i class="fas fa-file-pdf mr-2"></i>
                     Export PDF
                 </a>
-                <a href="" class="bg-green-500 text-white px-4 py-2 text-md rounded flex items-center">
+                <a href=""
+                    class="bg-green-500 text-white px-4 py-2 rounded-md flex items-center transition duration-300 hover:bg-green-600">
                     <i class="fas fa-file-csv mr-2"></i>
                     Export CSV
                 </a>
-                <a href="" class="bg-gray-700 text-white px-4 py-2 text-md rounded flex items-center">
+                <a href=""
+                    class="bg-gray-700 text-white px-4 py-2 rounded-md flex items-center transition duration-300 hover:bg-gray-800">
                     <i class="fas fa-file-excel mr-2"></i>
                     Export Excel
                 </a>
@@ -42,36 +47,37 @@
         </div>
 
         <div class="overflow-x-auto">
-            <table class="min-w-full bg-white border border-gray-300">
+            <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow">
                 <thead>
                     <tr class="bg-gray-200">
-                        <th class="py-2 px-4 border border-gray-300 font-normal text-md">No</th>
-                        <th class="py-2 px-4 border border-gray-300 font-normal text-md">Gambar</th>
-                        <th class="py-2 px-4 border border-gray-300 font-normal text-md">Judul</th>
-                        <th class="py-2 px-4 border border-gray-300 font-normal text-md">Deskripsi</th>
-                        <th class="py-2 px-4 border border-gray-300 font-normal text-md">Aksi</th>
+                        <th class="py-3 px-4 border border-gray-300 font-medium text-md text-left">No</th>
+                        <th class="py-3 px-4 border border-gray-300 font-medium text-md text-left">Gambar</th>
+                        <th class="py-3 px-4 border border-gray-300 font-medium text-md text-left">Judul</th>
+                        <th class="py-3 px-4 border border-gray-300 font-medium text-md text-left">Deskripsi</th>
+                        <th class="py-3 px-4 border border-gray-300 font-medium text-md text-left">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($artikels as $index => $artikel)
-                        <tr>
+                        <tr class="hover:bg-gray-100 transition duration-300">
                             <td class="py-2 px-4 border border-gray-300 text-center">{{ $index + 1 }}</td>
                             <td class="py-2 px-4 border border-gray-300">
                                 <img src="{{ asset('storage/' . $artikel->image_path) }}" alt="{{ $artikel->title }}"
-                                    class="h-16 w-16 object-cover mx-auto">
+                                    class="h-16 w-16 object-cover mx-auto rounded-md">
                             </td>
                             <td class="py-2 px-4 border border-gray-300">{{ $artikel->title }}</td>
                             <td class="py-2 px-4 border border-gray-300">{{ Str::limit($artikel->description, 50) }}</td>
-                            <td class="py-5 px-4 flex justify-center items-center space-x-2">
+                            <td class="py-2 px-4 border border-gray-300 flex justify-center items-center space-x-2">
                                 <a href="{{ route('artikel.edit', $artikel->id) }}"
-                                    class="text-blue-500 hover:text-blue-700 p-2">
+                                    class="text-blue-500 hover:text-blue-700 transition duration-300 p-2">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <form action="{{ route('artikel.delete', $artikel->id) }}" method="POST"
                                     onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:text-red-700 p-2">
+                                    <button type="submit"
+                                        class="text-red-500 hover:text-red-700 transition duration-300 p-2">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>

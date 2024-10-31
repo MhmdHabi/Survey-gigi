@@ -82,12 +82,11 @@ Route::prefix('admin')->group(function () {
         Route::post('/survey/{survey}/questions', [AdminQuestionsController::class, 'store'])->name('questions.store');
 
 
-
         // Routes Survey Admin
         Route::get('/survey', [AdminSurveyController::class, 'index'])->name('surveys.index');
         Route::get('/survey/create', [AdminSurveyController::class, 'create'])->name('surveys.create');
         Route::get('/survey/{id}', [AdminSurveyController::class, 'show'])->name('surveys.show');
-        Route::get('/survey/user', [AdminSurveyResponseController::class, 'index'])->name('survey.response.results');
+        Route::get('/surveys/user', [AdminSurveyResponseController::class, 'index'])->name('survey.response.result');
         Route::get('/survey/{id}/edit', [SurveyController::class, 'edit'])->name('surveys.edit');
         Route::put('/survey/{id}', [SurveyController::class, 'update'])->name('surveys.update');
         Route::post('/survey', [AdminSurveyController::class, 'store'])->name('surveys.store');
