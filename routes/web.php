@@ -37,14 +37,18 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/admin/login', [AuthAdminController::class, 'index'])->name('admin.login');
 Route::post('/admin/login', [AuthAdminController::class, 'login'])->name('admin.login.post');
+Route::post('/admin/logout', [AuthAdminController::class, 'logoutAdmin'])->name('admin.logout');
+
 
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-    Route::get('/survey/survey-susu-formula/{id}', [SurveyController::class, 'susu'])->name('susu');
+    Route::get('/survey/{id}', [SurveyController::class, 'susu'])->name('susu');
     Route::post('/survey/survey-susu-formula/{id}/submit', [SurveyResponseController::class, 'submit'])->name('surveys.submit');
     Route::get('/hasil-survey', [SurveyResponseController::class, 'results'])->name('survey.results');
-    Route::get('/admin/survey-results', [SurveyResultController::class, 'index'])->name('admin.survey.results');
+    Route::get('/survey/hasil/{surveyResponseId}', [SurveyController::class, 'resultsSurvey'])->name('survey.results.get');
+    Route::get('/survey-results', [SurveyResultController::class, 'index'])->name('admin.survey.results');
+    Route::get('/survey/hasil/{surveyResponseId}', [SurveyController::class, 'resultsSurvey'])->name('survey.results.get');
 });
 // Menampilkan daftar survei
 
@@ -74,6 +78,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
     Route::prefix('/')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+        Route::get('/users', [DashboardController::class, 'user'])->name('admin.users');
         Route::get('/artikel', [ArtikelController::class, 'artikel'])->name('admin.artikel');
         Route::get('/artikel/add', [ArtikelController::class, 'create'])->name('artikel.add');
         Route::post('/article/add', [ArtikelController::class, 'store'])->name('artikel.store');

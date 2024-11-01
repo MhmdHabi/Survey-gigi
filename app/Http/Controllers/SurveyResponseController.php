@@ -120,7 +120,9 @@ class SurveyResponseController extends Controller
         $surveyResponse->hasil = $hasil;
         $surveyResponse->save(); // Save the updated response
 
-        return redirect()->route('survey.results')->with('success', 'Survey submitted successfully!');
+        // Redirect to the survey results page with the correct surveyResponseId
+        return redirect()->route('survey.results.get', ['surveyResponseId' => $surveyResponse->id])
+            ->with('success', 'Survey submitted successfully!');
     }
 
 
@@ -128,10 +130,17 @@ class SurveyResponseController extends Controller
     {
         $surveyResponses = SurveyResponse::where('user_id', auth()->id())
             ->join('surveys', 'survey_responses.survey_id', '=', 'surveys.id')
-            ->join('users', 'survey_responses.user_id', '=', 'users.id') // Bergabung dengan tabel users
-            ->select('surveys.title', 'survey_responses.child_name', 'survey_responses.birth_date', 'survey_responses.gender', 'survey_responses.hasil', 'users.name as parent_name') // Ambil nama orang tua
+            ->join('users', 'survey_responses.user_id', '=', 'users.id')
+            ->select(
+                'surveys.title',
+                'survey_responses.child_name',
+                'survey_responses.birth_date',
+                'survey_responses.gender',
+                'survey_responses.hasil',
+                'users.name as parent_name'
+            )
             ->get();
 
-        return view('surveys.results', compact('surveyResponses')); // Kirim data ke view
+        return view('surveys.results', compact('surveyResponses'));
     }
 }

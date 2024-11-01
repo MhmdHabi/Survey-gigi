@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="mt-16 py-16 px-8 md:px-16 bg-gray-50">
-        <h2 class="text-2xl font-bold mb-3">Hasil Survei</h2>
+        <h2 class="text-2xl font-bold mb-6 text-center">Hasil Survei</h2>
 
         @if (session('success'))
             <div class="mb-4 text-green-600">
@@ -13,34 +13,49 @@
         @endif
 
         @if ($surveyResponses->isEmpty())
-            <p>Tidak ada hasil survei yang ditemukan.</p>
+            <p class="text-center">Tidak ada hasil survei yang ditemukan.</p>
         @else
-            <!-- Wrapper untuk membuat tabel scrollable pada ukuran mobile dan iPad -->
-            <div class="overflow-auto">
-                <table class="min-w-full border border-gray-300">
-                    <thead>
-                        <tr>
-                            <th class="border-b px-4 py-2 text-left">Judul Survei</th>
-                            <th class="border-b px-4 py-2 text-left">Nama Orang Tua</th>
-                            <th class="border-b px-4 py-2 text-left">Nama Anak</th>
-                            <th class="border-b px-4 py-2 text-left">Tanggal Lahir</th>
-                            <th class="border-b px-4 py-2 text-left">Gender</th>
-                            <th class="border-b px-4 py-2 text-left">Hasil (%)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($surveyResponses as $response)
-                            <tr>
-                                <td class="border-b px-4 py-2">{{ $response->title }}</td>
-                                <td class="border-b px-4 py-2">{{ $response->parent_name }}</td> <!-- Nama orang tua -->
-                                <td class="border-b px-4 py-2">{{ $response->child_name }}</td>
-                                <td class="border-b px-4 py-2">{{ $response->birth_date }}</td>
-                                <td class="border-b px-4 py-2">{{ $response->gender }}</td>
-                                <td class="border-b px-4 py-2">{{ number_format($response->hasil, 2) }}%</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach ($surveyResponses as $response)
+                    <div
+                        class="bg-white shadow-md rounded-lg p-6 flex flex-col relative transition-transform transform hover:scale-105 hover:shadow-lg">
+                        <h3 class="text-lg font-semibold text-center mb-4 text-blue-400">{{ $response->title }}</h3>
+
+                        <div class="flex flex-col items-center justify-center mb-4">
+                            <div class="w-full bg-gray-200 rounded-full h-6 mb-2">
+                                <div class="bg-blue-400 h-6 rounded-full" style="width: {{ $response->hasil }}%;"></div>
+                            </div>
+                            <span class="text-xl font-bold text-blue-400">{{ $response->hasil }}%</span>
+                        </div>
+                        <div class="flex flex-col mb-4">
+                            <div class="flex justify-between mb-2">
+                                <span><strong>Nama Orang Tua:</strong></span>
+                                <span>{{ $response->parent_name }}</span>
+                            </div>
+                            <div class="flex justify-between mb-2">
+                                <span><strong>Nama Anak:</strong></span>
+                                <span>{{ $response->child_name }}</span>
+                            </div>
+                            <div class="flex justify-between mb-2">
+                                <span><strong>Tgl Lahir:</strong></span>
+                                <span>{{ \Carbon\Carbon::parse($response->birth_date)->locale('id')->translatedFormat('l, d F Y') }}</span>
+                            </div>
+                            <div class="flex justify-between mb-2">
+                                <span><strong>Jenis Kelamin:</strong></span>
+                                <span>{{ $response->gender }}</span>
+                            </div>
+                            <div class="flex justify-between mb-2">
+                                <span><strong>Tgl Survey:</strong></span>
+                                <span>{{ \Carbon\Carbon::parse($response->created_at)->locale('id')->translatedFormat('l, d F Y') }}</span>
+                            </div>
+                        </div>
+
+                        <a href="#"
+                            class="bg-blue-400 text-white py-2 px-4 rounded-full text-center hover:bg-blue-700 transition duration-300">
+                            Detail Survey
+                        </a>
+                    </div>
+                @endforeach
             </div>
         @endif
     </div>

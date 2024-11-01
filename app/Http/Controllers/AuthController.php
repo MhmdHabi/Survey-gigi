@@ -41,7 +41,7 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'age' => 'required|integer|min:1|max:120',
-            'gender' => ['required', Rule::in(['laki_laki', 'perempuan'])],
+            'gender' => ['required', Rule::in(['laki-laki', 'perempuan'])],
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
         ]);

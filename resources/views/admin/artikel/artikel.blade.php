@@ -28,21 +28,6 @@
                     <i class="fas fa-plus mr-2"></i>
                     Tambah Artikel
                 </a>
-                <a href=""
-                    class="bg-yellow-500 text-white px-4 py-2 rounded-md flex items-center transition duration-300 hover:bg-yellow-600">
-                    <i class="fas fa-file-pdf mr-2"></i>
-                    Export PDF
-                </a>
-                <a href=""
-                    class="bg-green-500 text-white px-4 py-2 rounded-md flex items-center transition duration-300 hover:bg-green-600">
-                    <i class="fas fa-file-csv mr-2"></i>
-                    Export CSV
-                </a>
-                <a href=""
-                    class="bg-gray-700 text-white px-4 py-2 rounded-md flex items-center transition duration-300 hover:bg-gray-800">
-                    <i class="fas fa-file-excel mr-2"></i>
-                    Export Excel
-                </a>
             </div>
         </div>
 
@@ -67,7 +52,7 @@
                             </td>
                             <td class="py-2 px-4 border border-gray-300">{{ $artikel->title }}</td>
                             <td class="py-2 px-4 border border-gray-300">{{ Str::limit($artikel->description, 50) }}</td>
-                            <td class="py-2 px-4 border border-gray-300 flex justify-center items-center space-x-2">
+                            <td class="py-5 px-4 border border-gray-300 flex justify-center items-center space-x-2">
                                 <a href="{{ route('artikel.edit', $artikel->id) }}"
                                     class="text-blue-500 hover:text-blue-700 transition duration-300 p-2">
                                     <i class="fas fa-edit"></i>
