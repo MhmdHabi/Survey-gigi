@@ -2,7 +2,7 @@
     <div class="container mx-auto flex justify-between items-center">
         <!-- Logo -->
         <a href="{{ route('home') }}" id="logo">
-            <img src="assets/nav-logo.png" alt="My App Logo" class="h-10 lg:h-12">
+            <img src="{{ asset('assets/nav-logo.png') }}" alt="My App Logo" class="h-10 lg:h-12">
         </a>
 
         <!-- Desktop Menu -->
@@ -33,7 +33,7 @@
                 <li>
                     <a href="{{ route('survey.results') }}"
                         class=" uppercase font-[500] font-poppins 
-                          {{ request()->routeIs('artikel') ? 'border-b-2 border-[#5DB9FF]' : '' }}">
+                          {{ request()->routeIs('survey.results') ? 'border-b-2 border-[#5DB9FF]' : '' }}">
                         Hasil Survey
                     </a>
                 </li>
@@ -43,7 +43,7 @@
         <!-- Login -->
         @auth
             <!-- User Avatar with Dropdown -->
-            <div class="relative">
+            <div class="relative hidden lg:block">
                 <button id="user-menu"
                     class="flex items-center justify-center w-10 h-10 rounded-full bg-[#5DB9FF] text-white focus:outline-none">
                     <!-- Placeholder for user avatar -->
@@ -116,21 +116,13 @@
 
             <li>
                 @auth
-                    <!-- User Avatar with Dropdown -->
-                    <div class="relative">
-                        <button id="user-menu"
-                            class="flex items-center justify-center w-10 h-10 rounded-full bg-[#5DB9FF] text-white focus:outline-none">
-                            <!-- Placeholder for user avatar -->
-                            <span class="font-semibold">{{ auth()->user()->name[0] }}</span>
-                        </button>
-                        <div id="dropdown" class="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg hidden">
-                            <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                                @csrf
-                            </form>
-                        </div>
+                    <div class=" bg-blue-100 rounded-md shadow-lg ">
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                            class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                            @csrf
+                        </form>
                     </div>
                 @else
                     <a href="{{ route('login') }}"

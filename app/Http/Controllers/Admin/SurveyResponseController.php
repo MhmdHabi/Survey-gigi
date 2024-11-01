@@ -14,6 +14,6 @@ class SurveyResponseController extends Controller
             ->select('survey_id', 'user_id', 'child_name', 'birth_date', 'gender', 'hasil')
             ->get();
 
-        return view('admin.surveys.hasil', compact('surveyResponses')); // Kirim data ke view
+        return view('admin.surveys.hasil', compact('surveyResponses'));
     }
 }
