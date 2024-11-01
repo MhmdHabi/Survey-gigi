@@ -12,30 +12,23 @@ class AuthAdminController extends Controller
         return view('auth.login-admin');
     }
 
-    public function store(Request $request)
+    public function login(Request $request)
     {
-        // Validate the request
-        $request->validate([
+        // Validasi input
+        $validatedData = $request->validate([
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required|string',
         ]);
 
-        // Attempt to authenticate the user
-        if (Auth::attempt($request->only('email', 'password'))) {
-            // Check the role of the authenticated user
-            $user = Auth::user();
-            if ($user->role === 'admin') {
-                // Redirect to admin dashboard if the user is an admin
-                return redirect()->route('admin.dashboard')->with('success', 'Login successful');
-            } else {
-                // Redirect to home if the user is not an admin
-                return redirect()->route('home')->with('success', 'Login successful');
-            }
+        // Cek kredensial
+        if (Auth::attempt($validatedData)) {
+            // Jika berhasil, redirect ke halaman admin
+            return redirect()->route('admin.dashboard');
         }
 
-        // If authentication fails, return back with an error
+        // Jika gagal, kembali ke form login dengan pesan error
         return back()->withErrors([
-            'email' => 'Invalid credentials provided.',
+            'email' => 'Email atau password tidak valid.',
         ])->withInput();
     }
 }

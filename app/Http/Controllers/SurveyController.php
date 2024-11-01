@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
+use App\Models\Category;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Models\Survey;
@@ -62,10 +63,14 @@ class SurveyController extends Controller
     public function susu($id)
     {
         $survey = Survey::findOrFail($id);
-        // Assuming there's a relationship between Survey and Question
-        $questions = $survey->questions()->with('answers')->get();
+
+        // Ambil pertanyaan beserta jawabannya dan kategori
+        $questions = $survey->questions()->with(['answers', 'category'])->get()->groupBy('category_id');
+
         return view('home.survey.susu-formula', compact('survey', 'questions'));
     }
+
+
     public function gigi()
     {
         return view('home.survey.sikat-gigi');
