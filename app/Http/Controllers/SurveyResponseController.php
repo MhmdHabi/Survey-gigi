@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\Survey;
 use App\Models\SurveyResponse;
 use App\Models\ResponseAnswer;
+use App\Models\SurveyResult;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SurveyResponseController extends Controller
 {
@@ -20,14 +22,19 @@ class SurveyResponseController extends Controller
     }
 
     // Menyimpan respons survei
+
+
     public function store(Request $request, $surveyId)
     {
+        // Create a new SurveyResponse
         $surveyResponse = SurveyResponse::create([
             'survey_id' => $surveyId,
             'child_name' => $request->child_name,
             'birth_date' => $request->birth_date,
+            'user_id' => auth()->id(), // Assuming the user is authenticated
         ]);
 
+        // Iterate through responses to save each answer
         foreach ($request->responses as $questionId => $response) {
             if (is_array($response)) {
                 $answerId = $response['answer_id'] ?? null;
@@ -37,15 +44,28 @@ class SurveyResponseController extends Controller
                 $textResponse = null;
             }
 
-            $surveyResponse->responseAnswers()->create([
+            // Create response answer
+            $surveyResponse->answers()->create([
                 'question_id' => $questionId,
                 'answer_id' => $answerId,
                 'text_response' => $textResponse,
+            ]);
+
+            // Save to SurveyResult
+            SurveyResult::create([
+                'user_id' => auth()->id(),
+                'survey_id' => $surveyId,
+                'question_id' => $questionId,
+                'answer_id' => $answerId,
+                'survey_respon_id' => $surveyResponse->id,
             ]);
         }
 
         return redirect()->route('surveys.index')->with('success', 'Respons berhasil disimpan');
     }
+
+
+
 
     public function submit(Request $request, $surveyId)
     {
@@ -71,7 +91,7 @@ class SurveyResponseController extends Controller
         $totalQuestions = Question::where('survey_id', $surveyId)->count(); // Get total number of questions
         $correctAnswersCount = 0; // Count of answers with value 1
 
-        // Loop through the selected answers and store them
+        // Loop through the selected answers and store them in SurveyResult
         foreach ($request->answers as $answerId) {
             $answer = Answer::find($answerId);
 
@@ -82,6 +102,15 @@ class SurveyResponseController extends Controller
             if ($answer->value == 1) { // Assuming you have a 'value' column in the 'answers' table
                 $correctAnswersCount++;
             }
+
+            // Create a new SurveyResult entry for each answer
+            SurveyResult::create([
+                'user_id' => auth()->id(),
+                'survey_id' => $surveyId,
+                'question_id' => $answer->question_id, // Assuming Answer model has a question_id relation
+                'answer_id' => $answerId,
+                'survey_respon_id' => $surveyResponse->id,
+            ]);
         }
 
         // Calculate the result (hasil)
@@ -93,6 +122,7 @@ class SurveyResponseController extends Controller
 
         return redirect()->route('survey.results')->with('success', 'Survey submitted successfully!');
     }
+
 
     public function results()
     {

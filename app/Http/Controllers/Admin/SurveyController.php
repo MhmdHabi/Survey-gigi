@@ -38,11 +38,12 @@ class SurveyController extends Controller
 
     public function store(Request $request)
     {
+        // Validate the incoming request data
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'questions.*.category_id' => 'required|exists:categories,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'questions.*.category_id' => 'nullable|exists:categories,id',
             'questions.*.question_text' => 'required|string',
             'answers.*.*.answer_text' => 'required|string',
             'answers.*.*.value' => 'required|integer',
@@ -52,6 +53,16 @@ class SurveyController extends Controller
         $survey = new Survey();
         $survey->title = $validatedData['title'];
         $survey->description = $validatedData['description'];
+
+        // Process and store the image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('survey', $filename, 'public'); // Store the image in the public disk
+            $survey->image = $path; // Save the path to the survey model
+        }
+
+        // Save the survey to the database
         $survey->save();
 
         // Save the questions and their respective answers
@@ -68,11 +79,14 @@ class SurveyController extends Controller
                 $answer->question_id = $question->id; // Associate answer with the question
                 $answer->answer_text = $answerData['answer_text'];
                 $answer->value = $answerData['value'];
-                $answer->user_id = auth()->id();
+                $answer->user_id = auth()->id(); // Associate answer with the logged-in user
                 $answer->save();
             }
         }
+
+        // Retrieve all surveys with questions and answers
         $surveys = Survey::with('questions.answers')->withCount('questions')->get();
+
         return view('admin.surveys.index', compact('surveys'));
     }
 }

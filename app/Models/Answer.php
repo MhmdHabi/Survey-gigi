@@ -19,6 +19,10 @@ class Answer extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function surveyResult()
+    {
+        return $this->hasMany(SurveyResult::class);
+    }
     protected $casts = [
         'response_count' => 'integer',
     ];

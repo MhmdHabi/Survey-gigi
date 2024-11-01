@@ -6,6 +6,16 @@
     <div class="container mx-auto mt-6 bg-white shadow-lg rounded-lg p-6">
         <h2 class="text-3xl font-bold mb-4 text-blue-600">Detail Survei: {{ $survey->title }}</h2>
         <p class="mb-4 text-gray-700">{{ $survey->description }}</p>
+
+        <!-- Display the image if it exists -->
+        @if ($survey->image)
+            <!-- Adjust the property if needed -->
+            <div class="mb-4">
+                <img src="{{ asset('storage/' . $survey->image) }}" alt="Gambar Bukti"
+                    class="w-full h-auto rounded-lg shadow-md">
+            </div>
+        @endif
+
         <a href="{{ route('questions.buat', $survey->id) }}"
             class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block transition duration-200">Tambah
             Pertanyaan</a>
@@ -14,7 +24,7 @@
         <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
             <thead>
                 <tr class="bg-blue-100 text-gray-700">
-                    <th class="py-2 px-4 border-b">Kategori</th> <!-- Kolom Kategori -->
+                    <th class="py-2 px-4 border-b">Kategori</th>
                     <th class="py-2 px-4 border-b">Pertanyaan</th>
                     <th class="py-2 px-4 border-b">Jawaban</th>
                     <th class="py-2 px-4 border-b">Response Count</th>
@@ -25,7 +35,6 @@
                     <tr class="hover:bg-gray-100 transition duration-200">
                         <td class="py-2 px-4 border-b text-gray-600">
                             {{ $question->category ? $question->category->name : 'Tidak ada kategori' }}
-                            <!-- Menampilkan nama kategori -->
                         </td>
                         <td class="py-2 px-4 border-b text-gray-800">{{ $question->question_text }}</td>
                         <td class="py-2 px-4 border-b">
@@ -65,4 +74,5 @@
         <a href="{{ route('surveys.index') }}"
             class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 inline-block transition duration-200">Kembali</a>
     </div>
+
 @endsection

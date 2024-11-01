@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
     {
 
         $categories = [
-            ['name' => 'Kesehatan'],
-            ['name' => 'Pendidikan'],
-            ['name' => 'Sosial'],
+            ['name' => 'Pengetahuan'],
+            ['name' => 'Sikap'],
+            ['name' => 'Tindakan'],
         ];
 
         foreach ($categories as $category) {

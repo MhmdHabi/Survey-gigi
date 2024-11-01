@@ -27,8 +27,9 @@
                         <td class="border border-gray-300 p-4 text-sm">{{ $response->gender }}</td>
                         <td class="border border-gray-300 p-4 text-sm">{{ $response->hasil }}%</td>
                         <td class="border border-gray-300 p-4 text-center">
-                            <a href="" class="text-blue-500 hover:text-blue-700 transition duration-300">
-                                <i class="fas fa-eye"></i> <!-- Ikon show menggunakan Font Awesome -->
+                            <a href="{{ route('admin.result.show', ['surveyId' => $response->survey_id, 'surveyResponId' => $response->id]) }}"
+                                class="text-blue-500 hover:text-blue-700 transition duration-300">
+                                <i class="fas fa-eye"></i>
                             </a>
                         </td>
                     </tr>

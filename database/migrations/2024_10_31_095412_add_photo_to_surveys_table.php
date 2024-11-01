@@ -12,14 +12,14 @@ return new class extends Migration
     public function up()
     {
         Schema::table('surveys', function (Blueprint $table) {
-            $table->string('photo')->nullable(); // Add a column for the photo
+            $table->string('image')->nullable(); // Add a column for the photo
         });
     }
 
     public function down()
     {
         Schema::table('surveys', function (Blueprint $table) {
-            $table->dropColumn('photo'); // Remove the column if the migration is rolled back
+            $table->dropColumn('image'); // Remove the column if the migration is rolled back
         });
     }
 };

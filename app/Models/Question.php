@@ -33,4 +33,10 @@ class Question extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+
+    public function surveyResult()
+    {
+        return $this->hasMany(SurveyResult::class);
+    }
 }

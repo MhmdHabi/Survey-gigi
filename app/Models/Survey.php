@@ -9,7 +9,7 @@ class Survey extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'photo'];
+    protected $fillable = ['title', 'description', 'image'];
 
     public function questions()
     {
@@ -19,5 +19,9 @@ class Survey extends Model
     public function responses()
     {
         return $this->hasMany(SurveyResponse::class);
+    }
+    public function surveyResult()
+    {
+        return $this->hasMany(SurveyResult::class);
     }
 }
