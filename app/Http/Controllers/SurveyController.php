@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Models\Survey;
+use App\Models\SurveyResponse;
 use Illuminate\Support\Facades\Auth;
 
 class SurveyController extends Controller
@@ -79,5 +80,23 @@ class SurveyController extends Controller
     {
 
         return view('home.survey.pola-asuh');
+    }
+
+    public function resultsSurvey($surveyResponseId)
+    {
+        $surveyResponse = SurveyResponse::where('survey_responses.id', $surveyResponseId) // Menyebutkan alias tabel
+            ->join('surveys', 'survey_responses.survey_id', '=', 'surveys.id')
+            ->join('users', 'survey_responses.user_id', '=', 'users.id') // Bergabung dengan tabel users
+            ->select(
+                'surveys.title',
+                'survey_responses.child_name',
+                'survey_responses.birth_date',
+                'survey_responses.gender',
+                'survey_responses.hasil',
+                'users.name as parent_name'
+            )
+            ->firstOrFail(); // Mendapatkan hasil pertama atau gagal jika tidak ditemukan
+
+        return view('home.survey.hasil-survey', compact('surveyResponse')); // Kirim data ke view
     }
 }

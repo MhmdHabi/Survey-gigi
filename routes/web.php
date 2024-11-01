@@ -40,9 +40,10 @@ Route::post('/admin/login', [AuthAdminController::class, 'login'])->name('admin.
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-    Route::get('/survey/survey-susu-formula/{id}', [SurveyController::class, 'susu'])->name('susu');
+    Route::get('/survey/{id}', [SurveyController::class, 'susu'])->name('susu');
     Route::post('/survey/survey-susu-formula/{id}/submit', [SurveyResponseController::class, 'submit'])->name('surveys.submit');
     Route::get('/hasil-survey', [SurveyResponseController::class, 'results'])->name('survey.results');
+    Route::get('/survey/hasil/{surveyResponseId}', [SurveyController::class, 'resultsSurvey'])->name('survey.results.get');
 });
 // Menampilkan daftar survei
 
