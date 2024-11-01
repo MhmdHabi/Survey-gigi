@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('age');
             $table->string('email')->unique();
-            $table->enum('gender', ['laki_laki', 'perempuan']);
+            $table->enum('gender', ['laki-laki', 'perempuan']);
             $table->enum('role', ['admin', 'user']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

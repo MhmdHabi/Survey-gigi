@@ -31,4 +31,13 @@ class AuthAdminController extends Controller
             'email' => 'Email atau password tidak valid.',
         ])->withInput();
     }
+
+    public function logoutAdmin()
+    {
+        // Melakukan logout
+        Auth::logout();
+
+        // Mengalihkan pengguna kembali ke halaman login dengan pesan sukses
+        return redirect()->route('admin.login')->with('success', 'Anda telah berhasil keluar.');
+    }
 }

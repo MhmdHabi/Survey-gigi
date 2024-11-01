@@ -36,6 +36,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/admin/login', [AuthAdminController::class, 'index'])->name('admin.login');
 Route::post('/admin/login', [AuthAdminController::class, 'login'])->name('admin.login.post');
+Route::post('/admin/logout', [AuthAdminController::class, 'logoutAdmin'])->name('admin.logout');
+
 
 
 Route::middleware('auth')->group(function () {
@@ -72,6 +74,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
     Route::prefix('/')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+        Route::get('/users', [DashboardController::class, 'user'])->name('admin.users');
         Route::get('/artikel', [ArtikelController::class, 'artikel'])->name('admin.artikel');
         Route::get('/artikel/add', [ArtikelController::class, 'create'])->name('artikel.add');
         Route::post('/article/add', [ArtikelController::class, 'store'])->name('artikel.store');

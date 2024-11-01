@@ -8,12 +8,25 @@
             </button>
             <!-- Dropdown Menu -->
             <div id="dropdownMenu" class="absolute right-0 mt-20 w-48 bg-white border rounded shadow-md hidden">
-                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Logout</a>
+                <form id="dropdownLogoutForm" action="{{ route('admin.logout') }}" method="POST">
+                    @csrf
+                    <a href="#"
+                        onclick="event.preventDefault(); document.getElementById('dropdownLogoutForm').submit();"
+                        class="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                        Logout
+                    </a>
+                </form>
             </div>
+
         </div>
         <div class="hidden lg:flex items-center space-x-4">
             <span class="text-gray-600">Welcome, Admin</span>
-            <a href="#" class="text-blue-500">Logout</a>
+            <form id="dropdownLogoutForm" action="{{ route('admin.logout') }}" method="POST">
+                @csrf
+                <a href="#"
+                    onclick="event.preventDefault(); document.getElementById('dropdownLogoutForm').submit();"
+                    class="text-blue-500">Logout</a>
+            </form>
         </div>
     </div>
 </nav>

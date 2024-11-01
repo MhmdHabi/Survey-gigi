@@ -34,7 +34,7 @@
             </a>
         </li>
         <li>
-            <a href="#"
+            <a href="{{ route('admin.users') }}"
                 class="flex items-center py-2 px-4 text-gray-800 hover:bg-[#5DB9FF] hover:text-white sidebar-item 
                 {{ request()->is('admin/users') ? 'bg-[#5DB9FF] text-white' : '' }}"
                 id="usersLink">
@@ -52,13 +52,18 @@
             </a>
         </li>
         <li>
+            <form id="logoutForm" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+
             <a href="#"
                 class="flex items-center py-2 px-4 text-gray-800 hover:bg-[#5DB9FF] hover:text-white sidebar-item
-                {{ request()->is('admin/logout') ? 'bg-[#5DB9FF] text-white' : '' }}"
-                id="logoutLink">
+    {{ request()->is('admin/logout') ? 'bg-[#5DB9FF] text-white' : '' }}"
+                id="logoutLink" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
                 <i class="fas fa-sign-out-alt mr-2"></i>
                 <span class="sidebar-text">Logout</span>
             </a>
+
         </li>
     </ul>
 </div>

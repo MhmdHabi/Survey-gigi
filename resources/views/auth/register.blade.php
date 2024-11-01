@@ -25,7 +25,7 @@
                     <label class="block text-sm font-semibold text-gray-700">Jenis Kelamin</label>
                     <div class="mt-1">
                         <label class="inline-flex items-center">
-                            <input type="radio" name="gender" value="laki_laki" class="form-radio text-blue-600"
+                            <input type="radio" name="gender" value="laki-laki" class="form-radio text-blue-600"
                                 required>
                             <span class="ml-2">Laki-laki</span>
                         </label>
