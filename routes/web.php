@@ -34,9 +34,13 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'handleRegister'])->name('register.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/admin/login', [AuthAdminController::class, 'index'])->name('admin.login');
+Route::post('/admin/login', [AuthAdminController::class, 'login'])->name('admin.login.post');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/survey/survey-susu-formula/{id}', [SurveyController::class, 'susu'])->name('susu');
     Route::post('/survey/survey-susu-formula/{id}/submit', [SurveyResponseController::class, 'submit'])->name('surveys.submit');
     Route::get('/hasil-survey', [SurveyResponseController::class, 'results'])->name('survey.results');
 });
@@ -59,15 +63,13 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/tentang-kami', [HomeController::class, 'about'])->name('about');
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
-Route::get('/survey/survey-susu-formula/{id}', [SurveyController::class, 'susu'])->name('susu');
 Route::get('/survey-menyikat gigi', [SurveyController::class, 'gigi'])->name('gigi');
 Route::get('/survey-pola-asuh', [SurveyController::class, 'asuh'])->name('asuh');
 
 
-Route::prefix('admin')->group(function () {
-    // CRUD Mahasiswa
+Route::prefix('admin')->middleware('admin')->group(function () {
+
     Route::prefix('/')->group(function () {
-        Route::get('/login', [AuthAdminController::class, 'index'])->name('admin.login');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('/artikel', [ArtikelController::class, 'artikel'])->name('admin.artikel');
         Route::get('/artikel/add', [ArtikelController::class, 'create'])->name('artikel.add');

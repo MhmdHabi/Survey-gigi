@@ -29,22 +29,29 @@
                     </select>
                 </div>
 
-                <!-- Loop for displaying questions and answers -->
-                @foreach ($questions as $question)
-                    <div class="mb-4">
-                        <p class="font-semibold">{{ $question->question_text }}</p>
-                        @foreach ($question->answers as $answer)
-                            <label class="block">
-                                <input type="checkbox" name="answers[]" value="{{ $answer->id }}" class="mr-2">
-                                {{ $answer->answer_text }}
-                            </label>
+                <!-- Group questions by category -->
+                @foreach ($questions as $category_id => $category_questions)
+                    <div class="mb-6">
+                        <h2 class="text-lg font-bold text-gray-800 mb-3">
+                            Kategori: {{ $category_questions->first()->category->name ?? 'Umum' }}
+                        </h2>
+
+                        @foreach ($category_questions as $question)
+                            <div class="mb-4">
+                                <p class="font-semibold">{{ $question->question_text }}</p>
+                                @foreach ($question->answers as $answer)
+                                    <label class="block">
+                                        <input type="checkbox" name="answers[]" value="{{ $answer->id }}" class="mr-2">
+                                        {{ $answer->answer_text }}
+                                    </label>
+                                @endforeach
+                            </div>
                         @endforeach
                     </div>
                 @endforeach
 
                 <button type="submit" class="w-full bg-blue-500 text-white rounded py-2">Kirim Jawaban</button>
             </form>
-
         </div>
     </section>
 @endsection
