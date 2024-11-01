@@ -132,6 +132,7 @@ class SurveyResponseController extends Controller
             ->join('surveys', 'survey_responses.survey_id', '=', 'surveys.id')
             ->join('users', 'survey_responses.user_id', '=', 'users.id')
             ->select(
+                'survey_responses.id', // Add this line to select the id
                 'surveys.title',
                 'survey_responses.child_name',
                 'survey_responses.birth_date',
@@ -142,5 +143,18 @@ class SurveyResponseController extends Controller
             ->get();
 
         return view('surveys.results', compact('surveyResponses'));
+    }
+
+    public function showHasil($surveyResponseId)
+    {
+        // Retrieve the survey response and related results
+        $surveyResponse = SurveyResponse::with('user')->findOrFail($surveyResponseId);
+
+        // Get the associated survey results for the given survey response
+        $surveyResults = SurveyResult::with(['survey', 'question', 'answer'])
+            ->where('survey_respon_id', $surveyResponseId)
+            ->get();
+
+        return view('surveys.show-result', compact('surveyResults', 'surveyResponse'));
     }
 }

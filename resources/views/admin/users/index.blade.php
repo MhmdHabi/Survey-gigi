@@ -11,10 +11,10 @@
                 <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow">
                     <thead>
                         <tr class="bg-gray-200">
-                            <th class="py-3 px-4 border border-gray-300 font-medium text-md text-left">Name</th>
+                            <th class="py-3 px-4 border border-gray-300 font-medium text-md text-left">Nama Orang Tua</th>
                             <th class="py-3 px-4 border border-gray-300 font-medium text-md text-left">Email</th>
-                            <th class="py-3 px-4 border border-gray-300 font-medium text-md text-center">Age</th>
-                            <th class="py-3 px-4 border border-gray-300 font-medium text-md text-left">Gender</th>
+                            <th class="py-3 px-4 border border-gray-300 font-medium text-md text-center">Umur</th>
+                            <th class="py-3 px-4 border border-gray-300 font-medium text-md text-left">Jenis Kelamin</th>
                         </tr>
                     </thead>
                     <tbody>

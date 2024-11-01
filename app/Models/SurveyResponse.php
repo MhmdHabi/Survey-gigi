@@ -31,4 +31,10 @@ class SurveyResponse extends Model
     {
         return $this->hasMany(SurveyResult::class);
     }
+
+
+    public function surveyResults()
+    {
+        return $this->hasMany(SurveyResult::class);
+    }
 }

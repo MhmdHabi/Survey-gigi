@@ -47,8 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/survey/survey-susu-formula/{id}/submit', [SurveyResponseController::class, 'submit'])->name('surveys.submit');
     Route::get('/hasil-survey', [SurveyResponseController::class, 'results'])->name('survey.results');
     Route::get('/survey/hasil/{surveyResponseId}', [SurveyController::class, 'resultsSurvey'])->name('survey.results.get');
-    Route::get('/survey-results', [SurveyResultController::class, 'index'])->name('admin.survey.results');
-    Route::get('/survey/hasil/{surveyResponseId}', [SurveyController::class, 'resultsSurvey'])->name('survey.results.get');
+    Route::get('/survey/results/{surveyResponseId}', [SurveyResponseController::class, 'showHasil'])->name('survey.results.show');
 });
 // Menampilkan daftar survei
 
@@ -98,8 +97,8 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('/survey/{id}', [AdminSurveyController::class, 'show'])->name('surveys.show');
         Route::get('/admin/survey/{surveyId}/results/{surveyResponId}', [SurveyResultController::class, 'showSurveyResults'])->name('admin.result.show');
         Route::get('/surveys/user', [AdminSurveyResponseController::class, 'index'])->name('survey.response.result');
-        Route::get('/survey/{id}/edit', [SurveyController::class, 'edit'])->name('surveys.edit');
-        Route::put('/survey/{id}', [SurveyController::class, 'update'])->name('surveys.update');
+        Route::get('/survey/{id}/edit', [AdminSurveyController::class, 'edit'])->name('surveys.edit');
+        Route::put('/survey/{id}', [AdminSurveyController::class, 'update'])->name('surveys.update');
         Route::post('/survey', [AdminSurveyController::class, 'store'])->name('surveys.store');
         Route::delete('/survey/{id}', [SurveyController::class, 'destroy'])->name('surveys.destroy');
     });

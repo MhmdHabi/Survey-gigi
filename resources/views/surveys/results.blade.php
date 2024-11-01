@@ -49,11 +49,11 @@
                                 <span>{{ \Carbon\Carbon::parse($response->created_at)->locale('id')->translatedFormat('l, d F Y') }}</span>
                             </div>
                         </div>
-
-                        <a href="#"
+                        <a href="{{ route('survey.results.show', $response->id) }}"
                             class="bg-blue-400 text-white py-2 px-4 rounded-full text-center hover:bg-blue-700 transition duration-300">
                             Detail Survey
                         </a>
+
                     </div>
                 @endforeach
             </div>

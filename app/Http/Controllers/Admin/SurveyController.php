@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Question;
 use App\Models\Survey;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SurveyController extends Controller
 {
@@ -88,5 +89,44 @@ class SurveyController extends Controller
         $surveys = Survey::with('questions.answers')->withCount('questions')->get();
 
         return view('admin.surveys.index', compact('surveys'));
+    }
+
+    public function edit($id)
+    {
+        $survey = Survey::with('questions.answers')->findOrFail($id);
+        return view('admin.surveys.edit', compact('survey'));
+    }
+
+    // Mengupdate survei
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add validation for the image
+        ]);
+
+        $survey = Survey::findOrFail($id);
+
+        $survey->title = $request->input('title');
+        $survey->description = $request->input('description');
+
+        // Handle the image upload
+        if ($request->hasFile('image')) {
+            // Delete the old image if it exists
+            if ($survey->image) {
+                Storage::disk('public')->delete($survey->image);
+            }
+
+            // Generate a unique filename and store the image
+            $image = $request->file('image');
+            $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('survey', $filename, 'public'); // Store the image in the public disk
+            $survey->image = $path;
+        }
+
+        $survey->save();
+
+        return redirect()->route('surveys.index')->with('success', 'Survei berhasil diperbarui!');
     }
 }

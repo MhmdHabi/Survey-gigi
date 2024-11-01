@@ -6,7 +6,7 @@
             @foreach ($surveys as $survey)
                 <div class="border rounded-lg p-6 bg-white shadow-md flex flex-col" data-aos="fade-up"
                     data-aos-duration="1000" data-aos-easing="ease-in-out">
-                    <img src="{{ asset($survey->image) }}" alt="{{ $survey->title }}"
+                    <img src="{{ asset('storage/' . $survey->image) }}" alt="{{ $survey->title }}"
                         class="w-full h-48 object-cover mb-4 rounded-lg">
                     <h3 class="text-xl font-semibold text-black mb-2">{{ $survey->title }}</h3>
                     <p class="text-gray-700 mb-4">{{ $survey->description }}</p>

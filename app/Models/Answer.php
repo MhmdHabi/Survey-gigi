@@ -26,4 +26,8 @@ class Answer extends Model
     protected $casts = [
         'response_count' => 'integer',
     ];
+    public function surveyResults()
+    {
+        return $this->hasMany(SurveyResult::class);
+    }
 }

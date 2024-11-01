@@ -22,7 +22,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'age' => $this->faker->numberBetween(18, 60), // Generate random age between 18 and 60
             'email' => $this->faker->unique()->safeEmail(),
-            'gender' => $this->faker->randomElement(['laki_laki', 'perempuan']), // Random gender
+            'gender' => $this->faker->randomElement(['laki-laki', 'perempuan']), // Random gender
             'email_verified_at' => now(),
             'password' => Hash::make('password'), // Default password for all users
             'remember_token' => Str::random(10),

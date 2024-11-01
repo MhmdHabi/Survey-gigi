@@ -32,6 +32,11 @@ class SurveyResult extends Model
     {
         return $this->belongsTo(SurveyResponse::class, 'survey_respon_id');
     }
+    public function survey_response()
+    {
+        return $this->belongsTo(SurveyResponse::class, 'survey_respon_id');
+    }
+
     public static function getResultsBySurveyAndResponse($surveyId, $surveyResponseId)
     {
         return self::with(['question', 'answer'])

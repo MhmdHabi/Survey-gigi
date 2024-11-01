@@ -16,8 +16,6 @@ class SurveyResultController extends Controller
             ->where('survey_respon_id', $surveyResponId)
             ->get();
 
-
-
         return view('admin.result.show', compact('surveyResponses'));
     }
 }
