@@ -53,9 +53,6 @@
                                     $score = $totalResponses ? ($points / $totalResponses) * 100 : 0;
                                 @endphp
                                 {{ round($score, 2) }} %
-                                <p class="text-sm text-gray-500">
-                                    Ket: J = Jumlah point soal, T = Total soal. Rumus: J/T x 100 = skor %
-                                </p>
                             @else
                                 <p class="italic text-gray-500">Tidak ada respon.</p>
                             @endif

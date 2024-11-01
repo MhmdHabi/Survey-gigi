@@ -5,6 +5,7 @@
 @section('content')
     <div class="container mx-auto mt-4">
         <h2 class="text-2xl font-bold">Buat Pertanyaan Baru untuk Survei</h2>
+
         @if (session('success'))
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
                 <strong class="font-bold">Success!</strong>
@@ -27,9 +28,18 @@
             @csrf
 
             <div class="mb-4">
+                <label for="use_category" class="block text-sm font-medium text-gray-700">Gunakan Kategori?</label>
+                <div class="flex items-center">
+                    <input type="radio" id="use_category_yes" name="use_category" value="yes" class="mr-2" checked>
+                    <label for="use_category_yes" class="mr-4">Ya</label>
+                    <input type="radio" id="use_category_no" name="use_category" value="no" class="mr-2">
+                    <label for="use_category_no">Tidak</label>
+                </div>
+            </div>
+
+            <div id="category_section" class="mb-4">
                 <label for="category" class="block text-sm font-medium text-gray-700">Kategori</label>
-                <select id="category" name="category_id" class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                    required>
+                <select id="category" name="category_id" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
                     <option value="" disabled selected>Pilih Kategori</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -39,6 +49,7 @@
 
             <h5 class="mt-2 font-medium">Pertanyaan</h5>
             <div class="questions-container">
+                <!-- Pertanyaan dan Jawaban akan diisi di sini -->
                 <div class="flex items-center mb-4 question" data-question-index="0">
                     <div class="flex-1">
                         <label for="question_text_0" class="block text-sm font-medium text-gray-700">Pertanyaan</label>
@@ -87,8 +98,29 @@
     </div>
 
     <script>
-        // Add new question
+        // Show/Hide category section based on radio button selection
+        document.addEventListener('DOMContentLoaded', function() {
+            const useCategoryYes = document.getElementById('use_category_yes');
+            const useCategoryNo = document.getElementById('use_category_no');
+            const categorySection = document.getElementById('category_section');
+
+            useCategoryYes.addEventListener('change', function() {
+                categorySection.style.display = 'block';
+            });
+
+            useCategoryNo.addEventListener('change', function() {
+                categorySection.style.display = 'none';
+            });
+
+            // Initialize to show/hide based on default selection
+            if (useCategoryNo.checked) {
+                categorySection.style.display = 'none';
+            }
+        });
+
+        // Existing script for adding/removing questions and answers
         document.addEventListener('click', function(e) {
+            // Add new question
             if (e.target.classList.contains('addQuestion')) {
                 const questionsContainer = document.querySelector('.questions-container');
                 const questionIndex = questionsContainer.children.length;
@@ -122,10 +154,8 @@
                 </div>`;
                 questionsContainer.insertAdjacentHTML('beforeend', questionHTML);
             }
-        });
 
-        // Add new answer to the question
-        document.addEventListener('click', function(e) {
+            // Add new answer
             if (e.target.classList.contains('addAnswer')) {
                 const questionElement = e.target.closest('.question');
                 const answersContainer = questionElement.querySelector('.answers-container');
@@ -146,21 +176,15 @@
                 </div>`;
                 answersContainer.insertAdjacentHTML('beforeend', answerHTML);
             }
-        });
 
-        // Remove answer
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('removeAnswer')) {
-                const answerElement = e.target.closest('.answer');
-                answerElement.remove();
-            }
-        });
-
-        // Remove question
-        document.addEventListener('click', function(e) {
+            // Remove question
             if (e.target.classList.contains('removeQuestion')) {
-                const questionElement = e.target.closest('.question');
-                questionElement.remove();
+                e.target.closest('.question').remove();
+            }
+
+            // Remove answer
+            if (e.target.classList.contains('removeAnswer')) {
+                e.target.closest('.answer').remove();
             }
         });
     </script>

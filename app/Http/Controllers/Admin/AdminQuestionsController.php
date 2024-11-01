@@ -27,7 +27,7 @@ class AdminQuestionsController extends Controller
 
         // Validate incoming request data
         $validatedData = $request->validate([
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'nullable|exists:categories,id', // Make category_id nullable
             'questions' => 'required|array', // Validate questions as an array
             'questions.*.question_text' => 'required|string|max:255', // Validate each question text
             'questions.*.answers' => 'required|array', // Validate each answers array
@@ -42,7 +42,7 @@ class AdminQuestionsController extends Controller
                 'question_text' => $questionData['question_text'],
                 'type' => 'multiple_choice', // Set type to 'multiple_choice'
                 'survey_id' => $survey->id, // Associate the question with the survey
-                'category_id' => $validatedData['category_id'], // Associate the question with the category
+                'category_id' => $validatedData['category_id'] ?? null, // Set category_id to null if not provided
             ]);
 
             // Save answers
@@ -56,8 +56,7 @@ class AdminQuestionsController extends Controller
             }
         }
 
-        // Redirect back to the survey show page with a success message
         return redirect()->route('surveys.show', $surveyId)
-            ->with('success', 'Pertanyaan berhasil ditambahkan.');
+            ->with('success', 'Questions created successfully!');
     }
 }

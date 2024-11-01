@@ -63,11 +63,12 @@ Route::get('/survey/survey-susu-formula/{id}', [SurveyController::class, 'susu']
 Route::get('/survey-menyikat gigi', [SurveyController::class, 'gigi'])->name('gigi');
 Route::get('/survey-pola-asuh', [SurveyController::class, 'asuh'])->name('asuh');
 
+Route::get('admin/login', [AuthAdminController::class, 'index'])->name('admin.login');
+Route::post('admin/login', [AuthAdminController::class, 'store'])->name('admin.login.store');
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
     // CRUD Mahasiswa
     Route::prefix('/')->group(function () {
-        Route::get('/login', [AuthAdminController::class, 'index'])->name('admin.login');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('/artikel', [ArtikelController::class, 'artikel'])->name('admin.artikel');
         Route::get('/artikel/add', [ArtikelController::class, 'create'])->name('artikel.add');
