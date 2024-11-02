@@ -40,11 +40,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/admin/login', [AuthAdminController::class, 'index'])->name('admin.login');
 Route::post('/admin/login', [AuthAdminController::class, 'login'])->name('admin.login.post');
 Route::post('/admin/logout', [AuthAdminController::class, 'logoutAdmin'])->name('admin.logout');
-Route::get('/image', [ImageController::class, 'index'])->name('admin.image.index');
-Route::get('/image/create', [ImageController::class, 'create'])->name('admin.image.create');
-Route::post('/image/create', [ImageController::class, 'store'])->name('admin.image.store');
-Route::delete('/image/delete/{id}', [ImageController::class, 'destroy'])->name('admin.image.destroy');
-
 
 
 
@@ -55,7 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/survey/survey-susu-formula/{id}/submit', [SurveyResponseController::class, 'submit'])->name('surveys.submit');
     Route::get('/hasil-survey', [SurveyResponseController::class, 'results'])->name('survey.results');
     Route::get('/survey/hasil/{surveyResponseId}', [SurveyController::class, 'resultsSurvey'])->name('survey.results.get');
-    Route::post('survey/respone/{surveyResponseId}/image', [SurveyResponseController::class, 'storeImage'])->name('survey.response.image.store');
+    Route::post('survey/hasil/{surveyResponseId}/image', [SurveyResponseController::class, 'storeImage'])->name('survey.response.image.store');
     Route::get('/survey/results/{surveyResponseId}', [SurveyResponseController::class, 'showHasil'])->name('survey.results.show');
 });
 
@@ -63,7 +58,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/tentang-kami', [HomeController::class, 'about'])->name('about');
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
-Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
 Route::get('/survey-menyikat gigi', [SurveyController::class, 'gigi'])->name('gigi');
 Route::get('/survey-pola-asuh', [SurveyController::class, 'asuh'])->name('asuh');
 
@@ -99,5 +93,11 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::put('/survey/{id}', [AdminSurveyController::class, 'update'])->name('surveys.update');
         Route::post('/survey', [AdminSurveyController::class, 'store'])->name('surveys.store');
         Route::delete('/survey/{id}', [SurveyController::class, 'destroy'])->name('surveys.destroy');
+
+        // Routes Image Admin
+        Route::get('/image', [ImageController::class, 'index'])->name('admin.image.index');
+        Route::get('/image/create', [ImageController::class, 'create'])->name('admin.image.create');
+        Route::post('/image/create', [ImageController::class, 'store'])->name('admin.image.store');
+        Route::delete('/image/delete/{id}', [ImageController::class, 'destroy'])->name('admin.image.destroy');
     });
 });

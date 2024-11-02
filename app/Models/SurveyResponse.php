@@ -37,6 +37,7 @@ class SurveyResponse extends Model
     {
         return $this->hasMany(SurveyResult::class);
     }
+
     public function image(): BelongsTo
     {
         return $this->belongsTo(Image::class, 'image_id'); // Specify the foreign key explicitly

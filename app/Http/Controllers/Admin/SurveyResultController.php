@@ -11,7 +11,7 @@ class SurveyResultController extends Controller
 {
     public function showSurveyResults($surveyId, $surveyResponId)
     {
-        $surveyResponses = SurveyResult::with(['survey', 'user', 'question', 'answer'])
+        $surveyResponses = SurveyResult::with(['survey', 'user', 'question', 'answer', 'survey_response.image']) // Eager load image
             ->where('survey_id', $surveyId)
             ->where('survey_respon_id', $surveyResponId)
             ->get();

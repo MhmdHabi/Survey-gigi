@@ -13,8 +13,10 @@
                     <th class="border border-gray-300 p-4 text-left text-sm font-medium text-gray-600">Nama Anak</th>
                     <th class="border border-gray-300 p-4 text-left text-sm font-medium text-gray-600">Tanggal Lahir</th>
                     <th class="border border-gray-300 p-4 text-left text-sm font-medium text-gray-600">Umur</th>
-                    <th class="border border-gray-300 p-4 text-left text-sm font-medium text-gray-600">Gender</th>
+                    <th class="border border-gray-300 p-4 text-left text-sm font-medium text-gray-600">Jenis Kelamin</th>
                     <th class="border border-gray-300 p-4 text-left text-sm font-medium text-gray-600">Hasil</th>
+                    <th class="border border-gray-300 p-4 text-left text-sm font-medium text-gray-600">Gambar Survey</th>
+                    <th class="border border-gray-300 p-4 text-left text-sm font-medium text-gray-600">Nilai Gambar</th>
                     <th class="border border-gray-300 p-4 text-left text-sm font-medium text-gray-600">Aksi</th>
                 </tr>
             </thead>
@@ -30,6 +32,22 @@
                         </td>
                         <td class="border border-gray-300 p-4 text-sm">{{ $response->gender }}</td>
                         <td class="border border-gray-300 p-4 text-sm">{{ $response->hasil }}%</td>
+                        <td class="border border-gray-300 p-4 text-center">
+                            @if ($response->image)
+                                <img src="{{ asset('storage/' . $response->image->path) }}" alt="Image"
+                                    class="w-32 h-32 object-cover">
+                                <p>{{ $response->image->keterangan }}</p>
+                            @else
+                                <p>Tidak ada gambar.</p>
+                            @endif
+                        </td>
+                        <td class="border border-gray-300 p-4 text-center">
+                            @if ($response->image)
+                                {{ $response->image->nilai_image }}
+                            @else
+                                <p>Tidak ada gambar.</p>
+                            @endif
+                        </td>
                         <td class="border border-gray-300 p-4 text-center">
                             <a href="{{ route('admin.result.show', ['surveyId' => $response->survey_id, 'surveyResponId' => $response->id]) }}"
                                 class="text-blue-500 hover:text-blue-700 transition duration-300">
