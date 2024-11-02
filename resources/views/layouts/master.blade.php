@@ -32,6 +32,14 @@
         line-height: 1.5;
         max-height: 3em;
     }
+
+    .clamp-5-lines {
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 </style>
 </head>
 

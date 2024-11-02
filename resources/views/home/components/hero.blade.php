@@ -1,20 +1,23 @@
 <section class="bg-blue-50 py-12 lg:py-20 font-poppins">
     <div class="container mx-auto flex flex-col lg:flex-row items-center px-16">
-        <!-- Image -->
-        <div class="lg:w-2/5 mt-8 lg:mt-0 flex justify-center order-1 lg:order-2" data-aos="fade-left"
+
+        <!-- Image Section -->
+        <figure class="lg:w-2/5 mt-8 lg:mt-0 flex justify-center order-1 lg:order-2" data-aos="fade-left"
             data-aos-duration="1000" data-aos-easing="ease-in-out">
             <img src="{{ asset('assets/hero-image.png') }}" alt="Dental Health" class="w-full h-auto max-w-lg">
-        </div>
+        </figure>
 
-        <!-- Description -->
-        <div class="lg:w-3/5 text-center lg:text-left order-2 lg:order-1 px-20 lg:px-0 mt-3 lg:mt-0"
+        <!-- Description Section -->
+        <article class="lg:w-3/5 text-center lg:text-left order-2 lg:order-1 px-20 lg:px-0 mt-3 lg:mt-0"
             data-aos="fade-right" data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="200">
-            <h1 class="text-5xl font-bold text-black">
-                Sempurnakan <span class="text-[#5DB9FF]">Senyum</span>
-            </h1>
-            <h1 class="text-5xl font-bold text-black mb-7">
-                Sempurnakan <span class="text-[#5DB9FF]">hidup</span>
-            </h1>
+            <div>
+                <h1 class="text-5xl font-bold text-black">
+                    Sempurnakan <span class="text-[#5DB9FF]">Senyum</span>
+                </h1>
+                <h2 class="text-5xl font-bold text-black mb-7">
+                    Sempurnakan <span class="text-[#5DB9FF]">hidup</span>
+                </h2>
+            </div>
             <p class="text-black mb-7">
                 Ikuti survei kesehatan gigi kami untuk mengetahui kondisi gigi dan mulut Anda. Dapatkan penilaian
                 mendalam dan rekomendasi perawatan yang disesuaikan, memastikan Anda mendapatkan perhatian terbaik untuk
@@ -27,6 +30,6 @@
                 <span class="relative z-10 transition-colors duration-300 ease-in-out group-hover:text-white ">Ikuti
                     Survei</span>
             </a>
-        </div>
+        </article>
     </div>
 </section>

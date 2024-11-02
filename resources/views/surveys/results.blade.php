@@ -23,7 +23,8 @@
 
                         <div class="flex flex-col items-center justify-center mb-4">
                             <div class="w-full bg-gray-200 rounded-full h-6 mb-2">
-                                <div class="bg-blue-400 h-6 rounded-full" style="width: {{ $response->hasil }}%;"></div>
+                                <div class="bg-blue-400 h-6 rounded-full"
+                                    style="width: {{ number_format($response->hasil, 2, '.', '') }}%;"></div>
                             </div>
                             <span class="text-xl font-bold text-blue-400">{{ $response->hasil }}%</span>
                         </div>
@@ -65,15 +66,15 @@
                         {{-- Display Evaluation Message and Image --}}
                         <div class="flex flex-col items-center mb-4">
                             @if ($response->hasil >= 76)
-                                <p class="text-green-500 font-semibold">Evaluasi: Baik</p>
+                                <p class="text-green-500 font-semibold">Kriteria: Baik</p>
                                 <img src="{{ asset('path/to/good_image.jpg') }}" alt="Baik"
                                     class="h-16 w-16 object-cover mb-2">
                             @elseif ($response->hasil >= 56)
-                                <p class="text-yellow-500 font-semibold">Evaluasi: Sedang</p>
+                                <p class="text-yellow-500 font-semibold">Kriteria: Sedang</p>
                                 <img src="{{ asset('path/to/average_image.jpg') }}" alt="Sedang"
                                     class="h-16 w-16 object-cover mb-2">
                             @else
-                                <p class="text-red-500 font-semibold">Evaluasi: Buruk</p>
+                                <p class="text-red-500 font-semibold">Kriteria: Buruk</p>
                                 <img src="{{ asset('path/to/bad_image.jpg') }}" alt="Buruk"
                                     class="h-16 w-16 object-cover mb-2">
                             @endif
