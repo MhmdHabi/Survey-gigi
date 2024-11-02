@@ -22,18 +22,35 @@
                 <p class="text-gray-700 font-light mb-6">{{ $surveyResults->first()->survey->description }}</p>
 
                 <!-- User Information Section -->
-                <div class="border-t border-purple-200 pt-6">
-                    <p class="text-lg text-gray-800 mb-1"><strong>Nama Orang tua:</strong>
-                        {{ optional($surveyResponse->user)->name ?? 'N/A' }}</p>
-                    <p class="text-lg text-gray-800 mb-1"><strong>Nama Anak:</strong> {{ $surveyResponse->child_name }}</p>
-                    <p class="text-lg text-gray-800 mb-1"><strong>Umur Anak:</strong> @php
-                        $birthDate = \Carbon\Carbon::parse($surveyResponse->birth_date);
-                        $ageYears = $birthDate->diffInYears(now());
-                        $ageMonths = $birthDate->copy()->addYears($ageYears)->diffInMonths(now());
-                    @endphp
-                        {{ $ageYears }} tahun {{ $ageMonths }} bulan</p>
-                    <p class="text-lg text-gray-800"><strong>Skor:</strong> {{ $surveyResponse->hasil }}%</p>
+                <div class="flex items-start justify-between bg-white p-4 shadow-md rounded-lg">
+                    <div class="w-2/3 pr-4">
+                        <p class="text-lg text-gray-800 mb-1"><strong>Nama Orang Tua:</strong>
+                            {{ optional($surveyResponse->user)->name ?? 'N/A' }}</p>
+                        <p class="text-lg text-gray-800 mb-1"><strong>Nama Anak:</strong> {{ $surveyResponse->child_name }}
+                        </p>
+                        <p class="text-lg text-gray-800 mb-1"><strong>Umur Anak:</strong>
+                            @php
+                                $birthDate = \Carbon\Carbon::parse($surveyResponse->birth_date);
+                                $ageYears = $birthDate->diffInYears(now());
+                                $ageMonths = $birthDate->copy()->addYears($ageYears)->diffInMonths(now());
+                            @endphp
+                            {{ $ageYears }} tahun {{ $ageMonths }} bulan
+                        </p>
+                        <p class="text-lg text-gray-800"><strong>Skor:</strong> {{ $surveyResponse->hasil }}%</p>
+                    </div>
+
+                    <div class="w-1/3 flex flex-col items-center">
+                        @if ($surveyResponse->image)
+                            <img src="{{ asset('storage/' . $surveyResponse->image->path) }}" alt="Image"
+                                class="w-32 h-32 object-cover mb-2 rounded">
+                            <p class="text-sm text-gray-600">Keterangan :
+                                {{ $surveyResponse->image->keterangan }}</p>
+                        @else
+                            <p class="text-sm text-gray-600">Tidak ada gambar yang diunggah.</p>
+                        @endif
+                    </div>
                 </div>
+
             </div>
 
             <!-- Questions and Answers Section -->
@@ -43,7 +60,8 @@
                     <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
                         <p class="text-lg text-blue-500 font-semibold"><strong>Pertanyaan:</strong>
                             {{ $response->question->question_text }}</p>
-                        <p class="text-md text-gray-700 mt-3"><strong>Jawaban:</strong> {{ $response->answer->answer_text }}
+                        <p class="text-md text-gray-700 mt-3"><strong>Jawaban:</strong>
+                            {{ $response->answer->answer_text }}
                         </p>
                         <p class="text-sm text-gray-500 mt-2">Nilai: <span
                                 class="font-medium text-indigo-600">{{ $response->answer->value }}</span></p>

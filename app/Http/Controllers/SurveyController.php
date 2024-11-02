@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Answer;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Models\Survey;
@@ -88,6 +89,7 @@ class SurveyController extends Controller
             ->join('surveys', 'survey_responses.survey_id', '=', 'surveys.id')
             ->join('users', 'survey_responses.user_id', '=', 'users.id') // Bergabung dengan tabel users
             ->select(
+                'survey_responses.id',
                 'surveys.title',
                 'survey_responses.child_name',
                 'survey_responses.birth_date',
@@ -95,8 +97,9 @@ class SurveyController extends Controller
                 'survey_responses.hasil',
                 'users.name as parent_name'
             )
-            ->firstOrFail(); // Mendapatkan hasil pertama atau gagal jika tidak ditemukan
+            ->firstOrFail();
+        $images = Image::all(); // Mendapatkan hasil pertama atau gagal jika tidak ditemukan
 
-        return view('home.survey.hasil-survey', compact('surveyResponse')); // Kirim data ke view
+        return view('home.survey.hasil-survey', compact('surveyResponse', 'images')); // Kirim data ke view
     }
 }

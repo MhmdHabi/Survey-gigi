@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminQuestionsController;
+use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\SurveyController as AdminSurveyController;
 use App\Http\Controllers\Admin\SurveyResponseController as AdminSurveyResponseController;
 use App\Http\Controllers\Admin\SurveyResultController;
@@ -39,6 +40,13 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/admin/login', [AuthAdminController::class, 'index'])->name('admin.login');
 Route::post('/admin/login', [AuthAdminController::class, 'login'])->name('admin.login.post');
 Route::post('/admin/logout', [AuthAdminController::class, 'logoutAdmin'])->name('admin.logout');
+Route::get('/image', [ImageController::class, 'index'])->name('admin.image.index');
+Route::get('/image/create', [ImageController::class, 'create'])->name('admin.image.create');
+Route::post('/image/create', [ImageController::class, 'store'])->name('admin.image.store');
+Route::delete('/image/delete/{id}', [ImageController::class, 'destroy'])->name('admin.image.destroy');
+
+
+
 
 // Routes Middleware User
 Route::middleware('auth')->group(function () {
@@ -47,6 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/survey/survey-susu-formula/{id}/submit', [SurveyResponseController::class, 'submit'])->name('surveys.submit');
     Route::get('/hasil-survey', [SurveyResponseController::class, 'results'])->name('survey.results');
     Route::get('/survey/hasil/{surveyResponseId}', [SurveyController::class, 'resultsSurvey'])->name('survey.results.get');
+    Route::post('survey/respone/{surveyResponseId}/image', [SurveyResponseController::class, 'storeImage'])->name('survey.response.image.store');
     Route::get('/survey/results/{surveyResponseId}', [SurveyResponseController::class, 'showHasil'])->name('survey.results.show');
 });
 
@@ -56,6 +65,8 @@ Route::get('/tentang-kami', [HomeController::class, 'about'])->name('about');
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
 Route::get('/survey-menyikat gigi', [SurveyController::class, 'gigi'])->name('gigi');
 Route::get('/survey-pola-asuh', [SurveyController::class, 'asuh'])->name('asuh');
+
+
 
 
 // Routes Middleware Admin

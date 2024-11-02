@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('child_name');
             $table->string('hasil')->nullable();
             $table->date('birth_date');
+            $table->foreignId('image_id')->nullable()->constrained()->onDelete('cascade');
             $table->enum('gender', ['laki-laki', 'perempuan']);
             $table->timestamps();
         });

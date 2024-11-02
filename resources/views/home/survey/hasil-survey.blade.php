@@ -19,16 +19,13 @@
         </a>
 
         @if (!$surveyResponse)
-            {{-- Memastikan surveyResponse ada --}}
             <p>Tidak ada hasil survei yang ditemukan.</p>
         @else
             <div
-                class="flex flex-col md:flex-row bg-white shadow-lg rounded-lg md:p-10  justify-center items-center space-x-5">
-                {{-- Use flexbox for layout --}}
-                <div class="md:w-1/2 md:mr-4 mb-4 md:mb-0"> {{-- Chart section --}}
+                class="flex flex-col md:flex-row bg-white shadow-lg rounded-lg md:p-10 justify-center items-center space-x-5">
+                <div class="md:w-1/2 md:mr-4 mb-4 md:mb-0">
                     <h3 class="text-lg font-semibold text-center mb-3">{{ $surveyResponse->title }}</h3>
                     <canvas id="chart" width="250" height="250" class="mb-4 mx-auto max-w-xs"></canvas>
-                    {{-- Adjusted chart size --}}
 
                     <div class="flex justify-center mb-2">
                         <span class="mr-2">
@@ -46,7 +43,6 @@
 
                 <div class="space-y-4">
                     <div class="w-full md:w-full md:px-0">
-                        {{-- Data section --}}
                         <div class="flex flex-col px-4 lg:px-20 mb-4">
                             <div class="flex justify-between w-full mb-2">
                                 <span class="font-medium"><strong>Nama Orang Tua:</strong></span>
@@ -62,12 +58,14 @@
                             </div>
                             <div class="flex justify-between w-full mb-2">
                                 <span class="font-medium"><strong>Umur Anak:</strong></span>
-                                <span> @php
-                                    $birthDate = \Carbon\Carbon::parse($surveyResponse->birth_date);
-                                    $ageYears = $birthDate->diffInYears(now());
-                                    $ageMonths = $birthDate->copy()->addYears($ageYears)->diffInMonths(now());
-                                @endphp
-                                    {{ $ageYears }} tahun {{ $ageMonths }} bulan</span>
+                                <span>
+                                    @php
+                                        $birthDate = \Carbon\Carbon::parse($surveyResponse->birth_date);
+                                        $ageYears = $birthDate->diffInYears(now());
+                                        $ageMonths = $birthDate->copy()->addYears($ageYears)->diffInMonths(now());
+                                    @endphp
+                                    {{ $ageYears }} tahun {{ $ageMonths }} bulan
+                                </span>
                             </div>
                             <div class="flex justify-between w-full mb-2">
                                 <span class="font-medium"><strong>Jenis Kelamin:</strong></span>
@@ -75,8 +73,6 @@
                             </div>
                         </div>
                     </div>
-
-
 
                     {{-- Display Evaluation Message and Image --}}
                     <div class="flex flex-col items-center mb-4">
@@ -94,11 +90,37 @@
                                 class="h-16 w-16 object-cover mb-2">
                         @endif
                     </div>
+
+                    {{-- Image Selection Form --}}
+                    <form action="{{ route('survey.response.image.store', $surveyResponse->id) }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <div class="flex flex-col items-center mb-4">
+                            <label class="text-lg font-semibold mb-2">Pilih Gambar:</label>
+
+                            <!-- Assume you have a list of images to choose from -->
+                            <div class="grid grid-cols-3 gap-4">
+                                @foreach ($images as $image)
+                                    <!-- $images should be an array of image data -->
+                                    <div class="flex flex-col items-center">
+                                        <input type="radio" id="image_{{ $image->id }}" name="image_id"
+                                            value="{{ $image->id }}" class="hidden">
+                                        <label for="image_{{ $image->id }}" class="cursor-pointer">
+                                            <img src="{{ asset('storage/' . $image->path) }}"
+                                                alt="{{ $image->description }}"
+                                                class="h-32 w-32 object-cover mb-2 border-2 border-transparent hover:border-blue-500">
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Kirim Gambar</button>
+                    </form>
+
                 </div>
             </div>
-    </div>
-
-    @endif
+        @endif
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -135,7 +157,6 @@
                                     label: function(tooltipItem) {
                                         return tooltipItem.label + ': ' + tooltipItem.raw +
                                             '%'; // Tooltip label format
-                                        '%'; // Tooltip label format
                                     }
                                 }
                             }

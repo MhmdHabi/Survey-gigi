@@ -134,6 +134,7 @@ class SurveyResponseController extends Controller
         )
             ->join('surveys', 'survey_responses.survey_id', '=', 'surveys.id')
             ->join('users', 'survey_responses.user_id', '=', 'users.id')
+            ->join('images', 'survey_responses.image_id', '=', 'images.id')
             ->select(
                 'survey_responses.id',
                 'surveys.title',
@@ -141,7 +142,10 @@ class SurveyResponseController extends Controller
                 'survey_responses.birth_date',
                 'survey_responses.gender',
                 'survey_responses.hasil',
-                'users.name as parent_name'
+                'users.name as parent_name',
+                'images.path',
+                'images.keterangan',
+                'images.nilai_image'
             )
             ->get();
 
@@ -165,8 +169,9 @@ class SurveyResponseController extends Controller
 
     public function showHasil($surveyResponseId)
     {
-        // Retrieve the survey response and related results
-        $surveyResponse = SurveyResponse::with('user')->findOrFail($surveyResponseId);
+        // Retrieve the survey response and associated image
+        $surveyResponse = SurveyResponse::with(['user', 'image']) // Include the image relationship
+            ->findOrFail($surveyResponseId);
 
         // Get the associated survey results for the given survey response
         $surveyResults = SurveyResult::with(['survey', 'question', 'answer'])
@@ -174,5 +179,23 @@ class SurveyResponseController extends Controller
             ->get();
 
         return view('surveys.show-result', compact('surveyResults', 'surveyResponse'));
+    }
+
+
+    public function storeImage(Request $request, $surveyResponseId)
+    {
+        $request->validate([
+            'image_id' => 'required|exists:images,id', // Validate that the image_id exists in the images table
+        ]);
+
+        // Find the survey response
+        $surveyResponse = SurveyResponse::findOrFail($surveyResponseId);
+
+        // Update the image_id in the survey response
+        $surveyResponse->image_id = $request->input('image_id');
+        $surveyResponse->save();
+
+        // Redirect to the survey results route
+        return redirect()->route('survey.results');
     }
 }

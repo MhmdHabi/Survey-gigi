@@ -11,7 +11,7 @@ class SurveyResponse extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['survey_id', 'child_name', 'birth_date', 'gender', 'user_id', 'id'];
+    protected $fillable = ['survey_id', 'child_name', 'birth_date', 'gender', 'user_id', 'id', 'image_id'];
 
     public function survey()
     {
@@ -36,5 +36,9 @@ class SurveyResponse extends Model
     public function surveyResults()
     {
         return $this->hasMany(SurveyResult::class);
+    }
+    public function image(): BelongsTo
+    {
+        return $this->belongsTo(Image::class, 'image_id'); // Specify the foreign key explicitly
     }
 }
