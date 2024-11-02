@@ -35,12 +35,12 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'handleRegister'])->name('register.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Routes Admin
 Route::get('/admin/login', [AuthAdminController::class, 'index'])->name('admin.login');
 Route::post('/admin/login', [AuthAdminController::class, 'login'])->name('admin.login.post');
 Route::post('/admin/logout', [AuthAdminController::class, 'logoutAdmin'])->name('admin.logout');
 
-
-
+// Routes Middleware User
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/survey/{id}', [SurveyController::class, 'susu'])->name('susu');
@@ -49,22 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/survey/hasil/{surveyResponseId}', [SurveyController::class, 'resultsSurvey'])->name('survey.results.get');
     Route::get('/survey/results/{surveyResponseId}', [SurveyResponseController::class, 'showHasil'])->name('survey.results.show');
 });
-// Menampilkan daftar survei
 
-
-// Menampilkan detail survei
-
-
-
-
-// Menghapus survei
-
-// Jika Anda juga ingin menambahkan rute untuk membuat survei
-
-// Menyimpan survei baru
-
-
-
+// Routes User
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/tentang-kami', [HomeController::class, 'about'])->name('about');
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
@@ -72,7 +58,7 @@ Route::get('/survey-menyikat gigi', [SurveyController::class, 'gigi'])->name('gi
 Route::get('/survey-pola-asuh', [SurveyController::class, 'asuh'])->name('asuh');
 
 
-
+// Routes Middleware Admin
 Route::prefix('admin')->middleware('admin')->group(function () {
 
     Route::prefix('/')->group(function () {
@@ -95,7 +81,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('/survey', [AdminSurveyController::class, 'index'])->name('surveys.index');
         Route::get('/survey/create', [AdminSurveyController::class, 'create'])->name('surveys.create');
         Route::get('/survey/{id}', [AdminSurveyController::class, 'show'])->name('surveys.show');
-        Route::get('/admin/survey/{surveyId}/results/{surveyResponId}', [SurveyResultController::class, 'showSurveyResults'])->name('admin.result.show');
+        Route::get('/survey/{surveyId}/results/{surveyResponId}', [SurveyResultController::class, 'showSurveyResults'])->name('admin.result.show');
         Route::get('/surveys/user', [AdminSurveyResponseController::class, 'index'])->name('survey.response.result');
         Route::get('/survey/{id}/edit', [AdminSurveyController::class, 'edit'])->name('surveys.edit');
         Route::put('/survey/{id}', [AdminSurveyController::class, 'update'])->name('surveys.update');
