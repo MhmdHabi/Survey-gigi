@@ -12,6 +12,7 @@
                     <th class="border border-gray-300 p-4 text-left text-sm font-medium text-gray-600">Nama Orang Tua</th>
                     <th class="border border-gray-300 p-4 text-left text-sm font-medium text-gray-600">Nama Anak</th>
                     <th class="border border-gray-300 p-4 text-left text-sm font-medium text-gray-600">Tanggal Lahir</th>
+                    <th class="border border-gray-300 p-4 text-left text-sm font-medium text-gray-600">Umur</th>
                     <th class="border border-gray-300 p-4 text-left text-sm font-medium text-gray-600">Gender</th>
                     <th class="border border-gray-300 p-4 text-left text-sm font-medium text-gray-600">Hasil</th>
                     <th class="border border-gray-300 p-4 text-left text-sm font-medium text-gray-600">Aksi</th>
@@ -24,6 +25,9 @@
                         <td class="border border-gray-300 p-4 text-sm">{{ $response->user->name }}</td>
                         <td class="border border-gray-300 p-4 text-sm">{{ $response->child_name }}</td>
                         <td class="border border-gray-300 p-4 text-sm">{{ $response->birth_date }}</td>
+                        <td class="border border-gray-300 p-4 text-sm">
+                            {{ \Carbon\Carbon::parse($response->birth_date)->diffInYears(now()) }}
+                        </td>
                         <td class="border border-gray-300 p-4 text-sm">{{ $response->gender }}</td>
                         <td class="border border-gray-300 p-4 text-sm">{{ $response->hasil }}%</td>
                         <td class="border border-gray-300 p-4 text-center">
