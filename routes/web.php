@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/tentang-kami', [HomeController::class, 'about'])->name('about');
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel');
+Route::get('/artikel/detail/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
 Route::get('/survey-menyikat gigi', [SurveyController::class, 'gigi'])->name('gigi');
 Route::get('/survey-pola-asuh', [SurveyController::class, 'asuh'])->name('asuh');
 

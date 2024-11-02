@@ -3,7 +3,7 @@
 @section('title', 'Buat Pertanyaan')
 
 @section('content')
-    <div class="container mx-auto mt-4">
+    <div class="container mx-auto mt-4 px-2">
         <h2 class="text-2xl font-bold">Buat Pertanyaan Baru untuk Survei</h2>
 
         @if (session('success'))
@@ -47,20 +47,18 @@
                 </select>
             </div>
 
-            <h5 class="mt-2 font-medium">Pertanyaan</h5>
             <div class="questions-container">
                 <!-- Pertanyaan dan Jawaban akan diisi di sini -->
                 <div class="flex items-center mb-4 question" data-question-index="0">
-                    <div class="flex-1">
+                    <div class="flex-1 ">
                         <label for="question_text_0" class="block text-sm font-medium text-gray-700">Pertanyaan</label>
                         <input type="text" id="question_text_0"
                             class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                             name="questions[0][question_text]" required>
 
-                        <h5 class="mt-2 font-medium">Jawaban</h5>
                         <div class="answers-container">
                             <div class="flex items-center mb-4 answer" data-answer-index="0">
-                                <div class="flex-1">
+                                <div class="flex-1 mt-5">
                                     <label for="answer_text_0"
                                         class="block text-sm font-medium text-gray-700">Jawaban</label>
                                     <input type="text" id="answer_text_0"
@@ -131,10 +129,9 @@
                         <label for="question_text_${questionIndex}" class="block text-sm font-medium text-gray-700">Pertanyaan</label>
                         <input type="text" id="question_text_${questionIndex}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" name="questions[${questionIndex}][question_text]" required>
 
-                        <h5 class="mt-2 font-medium">Jawaban</h5>
                         <div class="answers-container">
                             <div class="flex items-center mb-4 answer" data-answer-index="0">
-                                <div class="flex-1">
+                                <div class="flex-1 mt-5">
                                     <label for="answer_text_${questionIndex}_0" class="block text-sm font-medium text-gray-700">Jawaban</label>
                                     <input type="text" id="answer_text_${questionIndex}_0" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" name="questions[${questionIndex}][answers][0][answer_text]" required>
 

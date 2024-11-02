@@ -3,7 +3,7 @@
 @section('title', 'Lihat Image')
 
 @section('content')
-    <div class="container flex flex-col w-full justify-center items-center h-screen mx-auto p-4">
+    <div class="container flex flex-col w-full justify-center items-center mx-auto p-4">
         <div class="flex justify-between items-center w-full mb-4">
             <h2 class="text-2xl font-semibold">Images List</h2>
             <!-- Create Image Button -->
@@ -37,11 +37,10 @@
                                 <td class="py-3 px-6">{{ $image->keterangan }}</td>
                                 <td class="py-3 px-6">{{ $image->nilai_image }}</td>
                                 <td class="py-3 px-6 text-center">
-
                                     <a href="{{ route('admin.image.destroy', $image->id) }}"
                                         class="text-red-500 hover:text-red-700"
                                         onclick="event.preventDefault(); document.getElementById('delete-form-{{ $image->id }}').submit();">
-                                        Delete
+                                        <i class="fas fa-trash-alt"></i> <!-- Delete icon -->
                                     </a>
                                     <form id="delete-form-{{ $image->id }}"
                                         action="{{ route('admin.image.destroy', $image->id) }}" method="POST"
