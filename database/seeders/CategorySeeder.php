@@ -13,10 +13,15 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = ['Pengetahuan', 'Sikap', 'Tindakan'];
+        $categories = [
+            ['name' => 'Pengetahuan'],
+            ['name' => 'Sikap'],
+            ['name' => 'Tindakan'],
+        ];
 
-        foreach ($categories as $categoryName) {
-            Category::firstOrCreate(['name' => $categoryName]); // Cegah duplikasi kategori jika sudah ada
+        // Insert categories into the database
+        foreach ($categories as $category) {
+            Category::create($category);
         }
     }
 }
