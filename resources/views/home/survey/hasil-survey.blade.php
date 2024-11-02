@@ -12,8 +12,10 @@
             </div>
         @endif
 
-        <a href="{{ route('home') }}" class="inline-block mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-            Kembali ke Beranda
+        <!-- Back Button -->
+        <a href="{{ route('home') }}" class="flex items-center text-blue-500 hover:text-blue-700 mb-8">
+            <i class="fas fa-arrow-left mr-2"></i>
+            <span class="text-lg font-semibold">Kembali</span>
         </a>
 
         @if (!$surveyResponse)
@@ -118,6 +120,7 @@
                                     label: function(tooltipItem) {
                                         return tooltipItem.label + ': ' + tooltipItem.raw +
                                             '%'; // Tooltip label format
+                                        '%'; // Tooltip label format
                                     }
                                 }
                             }

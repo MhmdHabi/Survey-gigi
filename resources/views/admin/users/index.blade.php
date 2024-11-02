@@ -20,10 +20,11 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr class="hover:bg-gray-100 transition duration-300">
-                                <td class="py-2 px-4 border border-gray-300">{{ $user->name }}</td>
-                                <td class="py-2 px-4 border border-gray-300">{{ $user->email }}</td>
-                                <td class="py-2 px-4 border border-gray-300 text-center">{{ $user->age }}</td>
-                                <td class="py-2 px-4 border border-gray-300">{{ $user->gender }}</td>
+                                <td class="py-2 px-4 border font-medum text-md border-gray-300">{{ $user->name }}</td>
+                                <td class="py-2 px-4 border font-medum text-md border-gray-300">{{ $user->email }}</td>
+                                <td class="py-2 px-4 border font-medum text-md border-gray-300 text-center">
+                                    {{ $user->age }}</td>
+                                <td class="py-2 px-4 border font-medum text-md border-gray-300">{{ $user->gender }}</td>
                             </tr>
                         @endforeach
                     </tbody>

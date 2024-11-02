@@ -19,7 +19,7 @@
                 @foreach ($surveyResponses as $response)
                     <div
                         class="bg-white shadow-md rounded-lg p-6 flex flex-col relative transition-transform transform hover:scale-105 hover:shadow-lg">
-                        <h3 class="text-lg font-semibold text-center mb-4 text-blue-400">{{ $response->title }}</h3>
+                        <h3 class="text-lg font-semibold text-center mb-4 text-black">{{ $response->title }}</h3>
 
                         <div class="flex flex-col items-center justify-center mb-4">
                             <div class="w-full bg-gray-200 rounded-full h-6 mb-2">
@@ -40,6 +40,17 @@
                             <div class="flex justify-between mb-2">
                                 <span><strong>Tgl Lahir:</strong></span>
                                 <span>{{ \Carbon\Carbon::parse($response->birth_date)->locale('id')->translatedFormat('l, d F Y') }}</span>
+                            </div>
+                            <div class="flex justify-between mb-2">
+                                <span><strong>Umur Anak:</strong></span>
+                                <span>
+                                    @php
+                                        $birthDate = \Carbon\Carbon::parse($response->birth_date);
+                                        $ageYears = $birthDate->diffInYears(now());
+                                        $ageMonths = $birthDate->copy()->addYears($ageYears)->diffInMonths(now());
+                                    @endphp
+                                    {{ $ageYears }} tahun {{ $ageMonths }} bulan
+                                </span>
                             </div>
                             <div class="flex justify-between mb-2">
                                 <span><strong>Jenis Kelamin:</strong></span>
