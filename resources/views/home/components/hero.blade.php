@@ -1,4 +1,4 @@
-<section class="bg-blue-50 py-12 lg:py-20">
+<section class="bg-blue-50 py-12 lg:py-20 font-poppins">
     <div class="container mx-auto flex flex-col lg:flex-row items-center px-16">
         <!-- Image -->
         <div class="lg:w-2/5 mt-8 lg:mt-0 flex justify-center order-1 lg:order-2" data-aos="fade-left"

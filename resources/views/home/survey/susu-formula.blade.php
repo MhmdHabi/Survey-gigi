@@ -24,7 +24,6 @@
                 </div>
             </div>
 
-
             <form action="{{ route('surveys.submit', $survey->id) }}" method="POST">
                 @csrf
 
@@ -55,6 +54,7 @@
                     @foreach ($questions as $category_id => $category_questions)
                         @php
                             $category_name = $category_questions->first()->category->name ?? null;
+                            $questionNumber = 1; // Initialize question number for each category
                         @endphp
 
                         <!-- Show category title only if it exists -->
@@ -69,7 +69,8 @@
 
                         @foreach ($category_questions as $question)
                             <div class="mb-4">
-                                <p class="font-semibold mb-2">{{ $question->question_text }}</p>
+                                <p class="font-semibold mb-2">{{ $questionNumber++ }}. {{ $question->question_text }}</p>
+                                <!-- Add numbering here -->
                                 <div class="flex flex-col space-y-2">
                                     @foreach ($question->answers as $answer)
                                         <label class="flex items-center">

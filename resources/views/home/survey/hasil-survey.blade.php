@@ -23,7 +23,7 @@
             <p>Tidak ada hasil survei yang ditemukan.</p>
         @else
             <div
-                class="flex flex-col md:flex-row bg-white shadow-lg rounded-lg md:p-10 py-10 justify-center items-center space-x-5">
+                class="flex flex-col md:flex-row bg-white shadow-lg rounded-lg md:p-10  justify-center items-center space-x-5">
                 {{-- Use flexbox for layout --}}
                 <div class="md:w-1/2 md:mr-4 mb-4 md:mb-0"> {{-- Chart section --}}
                     <h3 class="text-lg font-semibold text-center mb-3">{{ $surveyResponse->title }}</h3>
@@ -44,25 +44,39 @@
                     </div>
                 </div>
 
-                <div class="md:w-full md:px-0 "> {{-- Data section --}}
-                    <div class="flex flex-col  px-20  mb-4">
-                        <div class="flex justify-between w-full mb-1">
-                            <span><strong>Nama Orang Tua:</strong></span>
-                            <span>{{ $surveyResponse->parent_name }}</span>
-                        </div>
-                        <div class="flex justify-between w-full mb-1">
-                            <span><strong>Nama Anak:</strong></span>
-                            <span>{{ $surveyResponse->child_name }}</span>
-                        </div>
-                        <div class="flex justify-between w-full mb-1">
-                            <span><strong>Tgl Lahir:</strong></span>
-                            <span>{{ \Carbon\Carbon::parse($surveyResponse->birth_date)->locale('id')->translatedFormat('d F Y') }}</span>
-                        </div>
-                        <div class="flex justify-between mb-1">
-                            <span><strong>Jenis Kelamin:</strong></span>
-                            <span>{{ $surveyResponse->gender }}</span>
+                <div class="space-y-4">
+                    <div class="w-full md:w-full md:px-0">
+                        {{-- Data section --}}
+                        <div class="flex flex-col px-4 lg:px-20 mb-4">
+                            <div class="flex justify-between w-full mb-2">
+                                <span class="font-medium"><strong>Nama Orang Tua:</strong></span>
+                                <span>{{ $surveyResponse->parent_name }}</span>
+                            </div>
+                            <div class="flex justify-between w-full mb-2">
+                                <span class="font-medium"><strong>Nama Anak:</strong></span>
+                                <span>{{ $surveyResponse->child_name }}</span>
+                            </div>
+                            <div class="flex justify-between w-full mb-2">
+                                <span class="font-medium"><strong>Tgl Lahir:</strong></span>
+                                <span>{{ \Carbon\Carbon::parse($surveyResponse->birth_date)->locale('id')->translatedFormat('d F Y') }}</span>
+                            </div>
+                            <div class="flex justify-between w-full mb-2">
+                                <span class="font-medium"><strong>Umur Anak:</strong></span>
+                                <span> @php
+                                    $birthDate = \Carbon\Carbon::parse($surveyResponse->birth_date);
+                                    $ageYears = $birthDate->diffInYears(now());
+                                    $ageMonths = $birthDate->copy()->addYears($ageYears)->diffInMonths(now());
+                                @endphp
+                                    {{ $ageYears }} tahun {{ $ageMonths }} bulan</span>
+                            </div>
+                            <div class="flex justify-between w-full mb-2">
+                                <span class="font-medium"><strong>Jenis Kelamin:</strong></span>
+                                <span>{{ $surveyResponse->gender }}</span>
+                            </div>
                         </div>
                     </div>
+
+
 
                     {{-- Display Evaluation Message and Image --}}
                     <div class="flex flex-col items-center mb-4">
@@ -82,8 +96,9 @@
                     </div>
                 </div>
             </div>
+    </div>
 
-        @endif
+    @endif
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
