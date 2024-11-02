@@ -67,9 +67,10 @@ class SurveyResultController extends Controller
             $sheet->setCellValue('D' . $row, $response->birth_date);
             $sheet->setCellValue('E' . $row, \Carbon\Carbon::parse($response->birth_date)->diffInYears(now()));
             $sheet->setCellValue('F' . $row, $response->gender);
-            $sheet->setCellValue('G' . $row, $response->hasil . '%');
+            // Format hasil to two decimal places
+            $sheet->setCellValue('G' . $row, number_format($response->hasil, 2) . '%');
 
-            // Menentukan Kriteria berdasarkan hasil
+            // Determine the kriteria
             if ($response->hasil >= 76) {
                 $kriteria = 'Baik';
             } elseif ($response->hasil >= 56) {
@@ -77,18 +78,10 @@ class SurveyResultController extends Controller
             } else {
                 $kriteria = 'Kurang';
             }
-            $sheet->setCellValue('H' . $row, $kriteria); // Menyimpan Kriteria di kolom baru
 
+            $sheet->setCellValue('H' . $row, $kriteria);
             $sheet->setCellValue('I' . $row, $response->image ? $response->image->keterangan : 'Tidak ada gambar');
             $sheet->setCellValue('J' . $row, $response->image ? $response->image->nilai_image : 'Tidak ada gambar');
-
-            // Styling untuk setiap baris data
-            foreach (range('A', 'J') as $column) {
-                $sheet->getStyle($column . $row)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-                $sheet->getStyle($column . $row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                $sheet->getStyle($column . $row)->getFont()->setName('Times New Roman')->setSize(12); // Mengatur font dan ukuran
-            }
-
             $row++;
         }
 
@@ -154,7 +147,7 @@ class SurveyResultController extends Controller
                 $response->birth_date,
                 \Carbon\Carbon::parse($response->birth_date)->diffInYears(now()),
                 $response->gender,
-                $response->hasil . '%',
+                number_format($response->hasil, 2) . '%', // Format hasil to two decimal places
                 $kriteria,
                 $response->image ? $response->image->keterangan : 'Tidak ada gambar',
                 $response->image ? $response->image->nilai_image : 'Tidak ada gambar'
