@@ -79,7 +79,8 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::put('/artikel/{id}', [ArtikelController::class, 'update'])->name('artikel.update');
         Route::delete('/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.delete');
 
-        Route::get('survey/export', [SurveyResultController::class, 'export'])->name('survey.export');
+        Route::get('survey/export/excel', [SurveyResultController::class, 'export'])->name('survey.export');
+        Route::get('survey/export/csv', [SurveyResultController::class, 'exportCsv'])->name('survey.export.csv');
 
 
         // Routes Questions

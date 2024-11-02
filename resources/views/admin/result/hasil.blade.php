@@ -6,11 +6,19 @@
     <div class="container mx-auto mt-4 p-6 bg-white shadow-lg rounded-lg">
         <div class="flex justify-between items-center">
             <h2 class="text-2xl font-bold text-gray-800">Hasil Survei</h2>
-            <a href="{{ route('survey.export') }}"
-                class="bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-green-600 transition duration-300 flex items-center">
-                <i class="fas fa-file-excel mr-2"></i> <!-- Excel Icon -->
-                Export to Excel
-            </a>
+            <div class="flex space-x-3">
+                <a href="{{ route('survey.export') }}"
+                    class="bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-green-600 transition duration-300 flex items-center">
+                    <i class="fas fa-file-excel mr-2"></i> <!-- Excel Icon -->
+                    Export to Excel
+                </a>
+                <a href="{{ route('survey.export.csv') }}"
+                    class="bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-800 transition duration-300 flex items-center">
+                    <i class="fas fa-file-excel mr-2"></i> <!-- Excel Icon -->
+                    Export to Csv
+                </a>
+            </div>
+
 
         </div>
         <table class="min-w-full mt-4 border border-gray-300">

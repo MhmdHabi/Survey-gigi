@@ -109,6 +109,61 @@ class SurveyResultController extends Controller
         exit;
     }
 
+    public function exportCsv()
+    {
+        $surveyResponses = SurveyResponse::with(['survey', 'user', 'image'])->get();
+
+        // Nama file CSV
+        $filename = 'hasil_survei_' . date('Y-m-d_H-i-s') . '.csv';
+
+        // Output ke browser
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+
+        $output = fopen('php://output', 'w');
+
+        // Set header untuk CSV
+        fputcsv($output, [
+            'Judul Survei',
+            'Inisial Orang Tua',
+            'Inisial Anak',
+            'Tanggal Lahir Anak',
+            'Umur',
+            'Jenis Kelamin',
+            'Hasil',
+            'Kriteria', // Menambahkan kolom Kriteria
+            'Keterangan Survey Gambar',
+            'Keterangan Nilai Gambar'
+        ]);
+
+        // Populate data
+        foreach ($surveyResponses as $response) {
+            // Menentukan Kriteria berdasarkan hasil
+            if ($response->hasil >= 76) {
+                $kriteria = 'Baik';
+            } elseif ($response->hasil >= 56) {
+                $kriteria = 'Cukup';
+            } else {
+                $kriteria = 'Kurang';
+            }
+
+            fputcsv($output, [
+                $response->survey->title,
+                $this->getInitials($response->user->name),
+                $this->getInitials($response->child_name),
+                $response->birth_date,
+                \Carbon\Carbon::parse($response->birth_date)->diffInYears(now()),
+                $response->gender,
+                $response->hasil . '%',
+                $kriteria,
+                $response->image ? $response->image->keterangan : 'Tidak ada gambar',
+                $response->image ? $response->image->nilai_image : 'Tidak ada gambar'
+            ]);
+        }
+
+        fclose($output);
+        exit;
+    }
 
 
 
