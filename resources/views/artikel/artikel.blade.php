@@ -15,7 +15,8 @@
                         <p class="text-gray-600 mb-4 truncate-deskripsi">
                             {{ $artikel->description }}
                         </p>
-                        <a href="#" class="text-blue-500 hover:underline">Baca Selengkapnya</a>
+                        <a href="{{ route('artikel.show', $artikel->id) }}" class="text-blue-500 hover:underline">Baca
+                            Selengkapnya</a>
                     </div>
                 </div>
             @endforeach

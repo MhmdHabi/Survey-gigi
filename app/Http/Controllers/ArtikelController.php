@@ -115,4 +115,11 @@ class ArtikelController extends Controller
 
         return redirect()->route('admin.artikel')->with('success', 'Artikel berhasil dihapus.');
     }
+
+
+    public function show($id)
+    {
+        $artikel = Artikel::findOrFail($id);
+        return view('artikel.detail-artikel', compact('artikel'));
+    }
 }

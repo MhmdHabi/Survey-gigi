@@ -81,15 +81,15 @@
                     {{-- Display Evaluation Message and Image --}}
                     <div class="flex flex-col items-center mb-4">
                         @if ($surveyResponse->hasil >= 76)
-                            <p class="text-green-500 font-semibold">Evaluasi: Baik</p>
+                            <p class="text-green-500 font-semibold">kriteria: Baik</p>
                             <img src="{{ asset('path/to/good_image.jpg') }}" alt="Baik"
                                 class="h-16 w-16 object-cover mb-2">
                         @elseif ($surveyResponse->hasil >= 56)
-                            <p class="text-yellow-500 font-semibold">Evaluasi: Sedang</p>
+                            <p class="text-yellow-500 font-semibold">kriteria: Sedang</p>
                             <img src="{{ asset('path/to/average_image.jpg') }}" alt="Sedang"
                                 class="h-16 w-16 object-cover mb-2">
                         @else
-                            <p class="text-red-500 font-semibold">Evaluasi: Buruk</p>
+                            <p class="text-red-500 font-semibold">kriteria: Buruk</p>
                             <img src="{{ asset('path/to/bad_image.jpg') }}" alt="Buruk"
                                 class="h-16 w-16 object-cover mb-2">
                         @endif

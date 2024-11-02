@@ -1,8 +1,10 @@
 <nav class="fixed top-0 left-0 w-full bg-white text-[#5DB9FF] py-4 px-8 lg:px-16 shadow-lg z-30">
     <div class="container mx-auto flex justify-between items-center">
         <!-- Logo -->
-        <a href="{{ route('home') }}" id="logo">
-            <img src="{{ asset('assets/nav-logo.png') }}" alt="My App Logo" class="h-10 lg:h-12">
+        <a href="{{ route('home') }}" id="logo" class="flex items-center space-x-1">
+            <img src="{{ asset('assets/logo1.png') }}" alt="My App Logo" class="h-10 lg:h-12">
+            <img src="{{ asset('assets/logo2.png') }}" alt="My App Logo" class="h-10 lg:h-12">
+            <img src="{{ asset('assets/logo-image.png') }}" alt="My App Logo" class="h-10 lg:h-12">
         </a>
 
         <!-- Desktop Menu -->
