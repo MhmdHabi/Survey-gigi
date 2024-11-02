@@ -20,42 +20,67 @@
             {{-- Memastikan surveyResponse ada --}}
             <p>Tidak ada hasil survei yang ditemukan.</p>
         @else
-            <div class="bg-white shadow-lg rounded-lg p-4 mb-6 max-w-xs mx-auto"> {{-- Kecilkan ukuran kartu --}}
-                <h3 class="text-lg font-semibold text-center mb-3">{{ $surveyResponse->title }}</h3>
-                <canvas id="chart" width="100" height="100" class="mb-4"></canvas> {{-- Kecilkan ukuran chart --}}
+            <div
+                class="flex flex-col md:flex-row bg-white shadow-lg rounded-lg md:p-10 py-10 justify-center items-center space-x-5">
+                {{-- Use flexbox for layout --}}
+                <div class="md:w-1/2 md:mr-4 mb-4 md:mb-0"> {{-- Chart section --}}
+                    <h3 class="text-lg font-semibold text-center mb-3">{{ $surveyResponse->title }}</h3>
+                    <canvas id="chart" width="250" height="250" class="mb-4 mx-auto max-w-xs"></canvas>
+                    {{-- Adjusted chart size --}}
 
-                <div class="flex justify-center mb-2">
-                    <span class="mr-2">
-                        <span
-                            style="display:inline-block; width: 12px; height: 12px; background-color: rgba(75, 192, 192, 0.6);"></span>
-                        Performa
-                    </span>
-                    <span class="ml-4">
-                        <span
-                            style="display:inline-block; width: 12px; height: 12px; background-color: rgba(255, 255, 255, 1);"></span>
-                        Sisa
-                    </span>
+                    <div class="flex justify-center mb-2">
+                        <span class="mr-2">
+                            <span
+                                style="display:inline-block; width: 12px; height: 12px; background-color: rgba(75, 192, 192, 0.6);"></span>
+                            Performa
+                        </span>
+                        <span class="ml-4">
+                            <span
+                                style="display:inline-block; width: 12px; height: 12px; background-color: rgba(255, 255, 255, 1);"></span>
+                            Sisa
+                        </span>
+                    </div>
                 </div>
 
-                <div class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span><strong>Nama Orang Tua:</strong></span>
-                        <span>{{ $surveyResponse->parent_name }}</span>
+                <div class="md:w-full md:px-0 "> {{-- Data section --}}
+                    <div class="flex flex-col  px-20  mb-4">
+                        <div class="flex justify-between w-full mb-1">
+                            <span><strong>Nama Orang Tua:</strong></span>
+                            <span>{{ $surveyResponse->parent_name }}</span>
+                        </div>
+                        <div class="flex justify-between w-full mb-1">
+                            <span><strong>Nama Anak:</strong></span>
+                            <span>{{ $surveyResponse->child_name }}</span>
+                        </div>
+                        <div class="flex justify-between w-full mb-1">
+                            <span><strong>Tgl Lahir:</strong></span>
+                            <span>{{ \Carbon\Carbon::parse($surveyResponse->birth_date)->locale('id')->translatedFormat('d F Y') }}</span>
+                        </div>
+                        <div class="flex justify-between mb-1">
+                            <span><strong>Jenis Kelamin:</strong></span>
+                            <span>{{ $surveyResponse->gender }}</span>
+                        </div>
                     </div>
-                    <div class="flex justify-between mb-1">
-                        <span><strong>Nama Anak:</strong></span>
-                        <span>{{ $surveyResponse->child_name }}</span>
-                    </div>
-                    <div class="flex justify-between mb-1">
-                        <span><strong>Tgl Lahir:</strong></span>
-                        <span>{{ \Carbon\Carbon::parse($surveyResponse->birth_date)->locale('id')->translatedFormat('l, d F Y') }}</span>
-                    </div>
-                    <div class="flex justify-between mb-1">
-                        <span><strong>Jenis Kelamin:</strong></span>
-                        <span>{{ $surveyResponse->gender }}</span>
+
+                    {{-- Display Evaluation Message and Image --}}
+                    <div class="flex flex-col items-center mb-4">
+                        @if ($surveyResponse->hasil >= 76)
+                            <p class="text-green-500 font-semibold">Evaluasi: Baik</p>
+                            <img src="{{ asset('path/to/good_image.jpg') }}" alt="Baik"
+                                class="h-16 w-16 object-cover mb-2">
+                        @elseif ($surveyResponse->hasil >= 56)
+                            <p class="text-yellow-500 font-semibold">Evaluasi: Sedang</p>
+                            <img src="{{ asset('path/to/average_image.jpg') }}" alt="Sedang"
+                                class="h-16 w-16 object-cover mb-2">
+                        @else
+                            <p class="text-red-500 font-semibold">Evaluasi: Buruk</p>
+                            <img src="{{ asset('path/to/bad_image.jpg') }}" alt="Buruk"
+                                class="h-16 w-16 object-cover mb-2">
+                        @endif
                     </div>
                 </div>
             </div>
+
         @endif
     </div>
 
@@ -92,7 +117,7 @@
                                 callbacks: {
                                     label: function(tooltipItem) {
                                         return tooltipItem.label + ': ' + tooltipItem.raw +
-                                        '%'; // Tooltip label format
+                                            '%'; // Tooltip label format
                                     }
                                 }
                             }

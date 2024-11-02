@@ -27,6 +27,7 @@
                             </div>
                             <span class="text-xl font-bold text-blue-400">{{ $response->hasil }}%</span>
                         </div>
+
                         <div class="flex flex-col mb-4">
                             <div class="flex justify-between mb-2">
                                 <span><strong>Nama Orang Tua:</strong></span>
@@ -49,11 +50,28 @@
                                 <span>{{ \Carbon\Carbon::parse($response->created_at)->locale('id')->translatedFormat('l, d F Y') }}</span>
                             </div>
                         </div>
+
+                        {{-- Display Evaluation Message and Image --}}
+                        <div class="flex flex-col items-center mb-4">
+                            @if ($response->hasil >= 76)
+                                <p class="text-green-500 font-semibold">Evaluasi: Baik</p>
+                                <img src="{{ asset('path/to/good_image.jpg') }}" alt="Baik"
+                                    class="h-16 w-16 object-cover mb-2">
+                            @elseif ($response->hasil >= 56)
+                                <p class="text-yellow-500 font-semibold">Evaluasi: Sedang</p>
+                                <img src="{{ asset('path/to/average_image.jpg') }}" alt="Sedang"
+                                    class="h-16 w-16 object-cover mb-2">
+                            @else
+                                <p class="text-red-500 font-semibold">Evaluasi: Buruk</p>
+                                <img src="{{ asset('path/to/bad_image.jpg') }}" alt="Buruk"
+                                    class="h-16 w-16 object-cover mb-2">
+                            @endif
+                        </div>
+
                         <a href="{{ route('survey.results.show', $response->id) }}"
                             class="bg-blue-400 text-white py-2 px-4 rounded-full text-center hover:bg-blue-700 transition duration-300">
                             Detail Survey
                         </a>
-
                     </div>
                 @endforeach
             </div>

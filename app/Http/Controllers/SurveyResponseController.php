@@ -128,11 +128,14 @@ class SurveyResponseController extends Controller
 
     public function results()
     {
-        $surveyResponses = SurveyResponse::where('user_id', auth()->id())
+        $surveyResponses = SurveyResponse::where(
+            'user_id',
+            auth()->id()
+        )
             ->join('surveys', 'survey_responses.survey_id', '=', 'surveys.id')
             ->join('users', 'survey_responses.user_id', '=', 'users.id')
             ->select(
-                'survey_responses.id', // Add this line to select the id
+                'survey_responses.id',
                 'surveys.title',
                 'survey_responses.child_name',
                 'survey_responses.birth_date',
@@ -142,8 +145,23 @@ class SurveyResponseController extends Controller
             )
             ->get();
 
+        // Add a message and image based on hasil
+        foreach ($surveyResponses as $response) {
+            if ($response->hasil >= 76) {
+                $response->evaluation = 'Baik';
+                $response->image = asset('path/to/good_image.jpg'); // Adjust the path to your image
+            } elseif ($response->hasil >= 56) {
+                $response->evaluation = 'Sedang';
+                $response->image = asset('path/to/average_image.jpg'); // Adjust the path to your image
+            } else {
+                $response->evaluation = 'Buruk';
+                $response->image = asset('path/to/bad_image.jpg'); // Adjust the path to your image
+            }
+        }
+
         return view('surveys.results', compact('surveyResponses'));
     }
+
 
     public function showHasil($surveyResponseId)
     {
