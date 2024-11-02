@@ -43,6 +43,7 @@ Route::post('/admin/logout', [AuthAdminController::class, 'logoutAdmin'])->name(
 
 
 
+
 // Routes Middleware User
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
@@ -77,6 +78,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('/artikel/{id}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
         Route::put('/artikel/{id}', [ArtikelController::class, 'update'])->name('artikel.update');
         Route::delete('/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.delete');
+
+        Route::get('survey/export', [SurveyResultController::class, 'export'])->name('survey.export');
+
 
         // Routes Questions
         Route::get('/survey/{survey}/questions/create', [AdminQuestionsController::class, 'buat'])->name('questions.buat');
