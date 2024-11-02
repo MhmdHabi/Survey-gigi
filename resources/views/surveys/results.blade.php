@@ -65,19 +65,12 @@
 
                         {{-- Display Evaluation Message and Image --}}
                         <div class="flex flex-col items-center mb-4">
-                            @if ($response->hasil >= 76)
-                                <p class="text-green-500 font-semibold">Kriteria: Baik</p>
-                                <img src="{{ asset('path/to/good_image.jpg') }}" alt="Baik"
-                                    class="h-16 w-16 object-cover mb-2">
-                            @elseif ($response->hasil >= 56)
-                                <p class="text-yellow-500 font-semibold">Kriteria: Sedang</p>
-                                <img src="{{ asset('path/to/average_image.jpg') }}" alt="Sedang"
-                                    class="h-16 w-16 object-cover mb-2">
-                            @else
-                                <p class="text-red-500 font-semibold">Kriteria: Buruk</p>
-                                <img src="{{ asset('path/to/bad_image.jpg') }}" alt="Buruk"
-                                    class="h-16 w-16 object-cover mb-2">
-                            @endif
+                            <p class="font-semibold">
+                                Kriteria: {{ $response->evaluation }}
+                            </p>
+                            <img src="{{ asset('storage/' . $response->path) }}" alt="{{ $response->keterangan }}"
+                                class="h-16 w-16 object-cover mb-2">
+                            <p class="text-gray-600">{{ $response->keterangan }}</p>
                         </div>
 
                         <a href="{{ route('survey.results.show', $response->id) }}"
