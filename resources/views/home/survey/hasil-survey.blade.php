@@ -12,19 +12,27 @@
             </div>
         @endif
 
-        <a href="{{ route('home') }}" class="inline-block mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-            Kembali ke Beranda
+        <!-- Back Button -->
+        <a href="{{ route('home') }}" class="flex items-center text-blue-500 hover:text-blue-700 mb-8">
+            <i class="fas fa-arrow-left mr-2"></i>
+            <span class="text-lg font-semibold">Kembali</span>
         </a>
 
         @if (!$surveyResponse)
             {{-- Memastikan surveyResponse ada --}}
             <p>Tidak ada hasil survei yang ditemukan.</p>
         @else
-            <div class="bg-white shadow-lg rounded-lg p-4 mb-6 max-w-xs mx-auto"> {{-- Kecilkan ukuran kartu --}}
+            <div class="bg-white shadow-lg rounded-lg p-4 mb-6 max-w-lg mx-auto"> {{-- Kecilkan ukuran kartu --}}
                 <h3 class="text-lg font-semibold text-center mb-3">{{ $surveyResponse->title }}</h3>
-                <canvas id="chart" width="100" height="100" class="mb-4"></canvas> {{-- Kecilkan ukuran chart --}}
+                <canvas id="chart" width="100" height="100" class="mb-4 p-7"></canvas> {{-- Kecilkan ukuran chart --}}
 
-                <div class="flex justify-center mb-2">
+                <!-- Display score below the chart -->
+                <div class="text-center mt-4">
+                    <p class="text-lg font-semibold">Skor:</p>
+                    <p class="text-3xl font-bold text-blue-400">{{ $surveyResponse->hasil ?? 0 }}%</p>
+                </div>
+
+                <div class="flex justify-center mb-2 mt-4">
                     <span class="mr-2">
                         <span
                             style="display:inline-block; width: 12px; height: 12px; background-color: rgba(75, 192, 192, 0.6);"></span>
@@ -39,19 +47,28 @@
 
                 <div class="flex flex-col">
                     <div class="flex justify-between mb-1">
-                        <span><strong>Nama Orang Tua:</strong></span>
+                        <span><strong>Nama Orang Tua :</strong></span>
                         <span>{{ $surveyResponse->parent_name }}</span>
                     </div>
                     <div class="flex justify-between mb-1">
-                        <span><strong>Nama Anak:</strong></span>
+                        <span><strong>Nama Anak :</strong></span>
                         <span>{{ $surveyResponse->child_name }}</span>
                     </div>
                     <div class="flex justify-between mb-1">
-                        <span><strong>Tgl Lahir:</strong></span>
+                        <span><strong>Tgl Lahir :</strong></span>
                         <span>{{ \Carbon\Carbon::parse($surveyResponse->birth_date)->locale('id')->translatedFormat('l, d F Y') }}</span>
                     </div>
                     <div class="flex justify-between mb-1">
-                        <span><strong>Jenis Kelamin:</strong></span>
+                        <span><strong>Umur Anak :</strong></span>
+                        <span> @php
+                            $birthDate = \Carbon\Carbon::parse($surveyResponse->birth_date);
+                            $ageYears = $birthDate->diffInYears(now());
+                            $ageMonths = $birthDate->copy()->addYears($ageYears)->diffInMonths(now());
+                        @endphp
+                            {{ $ageYears }} tahun {{ $ageMonths }} bulan</span>
+                    </div>
+                    <div class="flex justify-between mb-1">
+                        <span><strong>Jenis Kelamin :</strong></span>
                         <span>{{ $surveyResponse->gender }}</span>
                     </div>
                 </div>
@@ -92,7 +109,7 @@
                                 callbacks: {
                                     label: function(tooltipItem) {
                                         return tooltipItem.label + ': ' + tooltipItem.raw +
-                                        '%'; // Tooltip label format
+                                            '%'; // Tooltip label format
                                     }
                                 }
                             }
