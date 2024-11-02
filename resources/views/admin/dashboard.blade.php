@@ -5,7 +5,7 @@
         <div class="flex-1 flex flex-col justify-between py-6 mr-4 text-white">
             <p>{{ \Carbon\Carbon::now()->format('l, d F Y') }}</p>
             <div>
-                <h2 class="text-2xl font-bold">Good Day, Habi!</h2>
+                <h2 class="text-2xl font-bold">Good Day, Admin!</h2>
                 <p class="mt-2">Have a Nice Day!</p>
             </div>
         </div>

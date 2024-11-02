@@ -22,18 +22,23 @@
             <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow">
                 <thead>
                     <tr class="bg-gray-200 border-b border-gray-300">
-                        <th class="py-3 px-4 border-r border-gray-300 text-left text-gray-700">Judul</th>
-                        <th class="py-3 px-4 border-r border-gray-300 text-left text-gray-700">Deskripsi</th>
-                        <th class="py-3 px-4 border-r border-gray-300 text-left text-gray-700">Jumlah Pertanyaan</th>
-                        <th class="py-3 px-4 text-left text-gray-700">Aksi</th>
+                        <th class="py-3 px-4 border-r border-gray-300 text-left text-md font-medium text-gray-700">Judul
+                        </th>
+                        <th class="py-3 px-4 border-r border-gray-300 text-left text-md font-medium text-gray-700">Deskripsi
+                        </th>
+                        <th class="py-3 px-4 border-r border-gray-300 text-left text-md font-medium text-gray-700">Jumlah
+                            Pertanyaan</th>
+                        <th class="py-3 px-4 text-md font-medium text-center text-gray-700">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($surveys as $survey)
                         <tr class="hover:bg-gray-100 border-b border-gray-300 transition duration-300">
-                            <td class="py-2 px-4 border-r border-gray-300">{{ $survey->title }}</td>
-                            <td class="py-2 px-4 border-r border-gray-300">{{ $survey->description }}</td>
-                            <td class="py-2 px-4 border-r border-gray-300">{{ $survey->questions_count }}</td>
+                            <td class="py-2 px-4 border-r font-medium text-md border-gray-300">{{ $survey->title }}</td>
+                            <td class="py-2 px-4 border-r font-medium text-md border-gray-300">{{ $survey->description }}
+                            </td>
+                            <td class="py-2 px-4 border-r font-medium text-md border-gray-300">
+                                {{ $survey->questions_count }}</td>
                             <td class="py-2 px-4 flex justify-center items-center space-x-2">
                                 <a href="{{ route('surveys.show', $survey->id) }}"
                                     class="bg-blue-600 text-white p-2 rounded-lg shadow hover:bg-blue-700 transition duration-300 flex items-center justify-center">

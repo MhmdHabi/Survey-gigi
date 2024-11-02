@@ -37,7 +37,7 @@
 
 
 
-<body class="bg-gray-100 flex flex-col min-h-screen font-poppins">
+<body class="bg-gray-100 flex flex-col min-h-screen">
 
 
 
