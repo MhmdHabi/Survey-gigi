@@ -19,8 +19,8 @@
             <a href="{{ route('surveys.index') }}"
                 class="flex items-center py-2 px-4 text-gray-800 hover:bg-[#5DB9FF] hover:text-white sidebar-item 
                 {{ request()->is('admin/survey') ? 'bg-[#5DB9FF] text-white' : '' }}"
-                id="usersLink">
-                <i class="fas fa-users mr-2"></i>
+                id="surveyLink">
+                <i class="fas fa-poll mr-2"></i>
                 <span class="sidebar-text">Survey</span>
             </a>
         </li>
@@ -28,7 +28,7 @@
             <a href="{{ route('survey.response.result') }}"
                 class="flex items-center py-2 px-4 text-gray-800 hover:bg-[#5DB9FF] hover:text-white sidebar-item 
                 {{ request()->is('admin/surveys/user') ? 'bg-[#5DB9FF] text-white' : '' }}"
-                id="usersLink">
+                id="userSurveyLink">
                 <i class="fas fa-users mr-2"></i>
                 <span class="sidebar-text">User Survey</span>
             </a>
@@ -37,9 +37,9 @@
             <a href="{{ route('admin.image.index') }}"
                 class="flex items-center py-2 px-4 text-gray-800 hover:bg-[#5DB9FF] hover:text-white sidebar-item 
                 {{ request()->is('admin/image') ? 'bg-[#5DB9FF] text-white' : '' }}"
-                id="usersLink">
-                <i class="fas fa-users mr-2"></i>
-                <span class="sidebar-text">Image</span>
+                id="imageLink">
+                <i class="fas fa-image mr-2"></i>
+                <span class="sidebar-text">Image Survey</span>
             </a>
         </li>
         <li>
@@ -47,7 +47,7 @@
                 class="flex items-center py-2 px-4 text-gray-800 hover:bg-[#5DB9FF] hover:text-white sidebar-item 
                 {{ request()->is('admin/users') ? 'bg-[#5DB9FF] text-white' : '' }}"
                 id="usersLink">
-                <i class="fas fa-users mr-2"></i>
+                <i class="fas fa-user-friends mr-2"></i>
                 <span class="sidebar-text">Users</span>
             </a>
         </li>
@@ -64,15 +64,13 @@
             <form id="logoutForm" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
-
             <a href="#"
                 class="flex items-center py-2 px-4 text-gray-800 hover:bg-[#5DB9FF] hover:text-white sidebar-item
-    {{ request()->is('admin/logout') ? 'bg-[#5DB9FF] text-white' : '' }}"
+                {{ request()->is('admin/logout') ? 'bg-[#5DB9FF] text-white' : '' }}"
                 id="logoutLink" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
                 <i class="fas fa-sign-out-alt mr-2"></i>
                 <span class="sidebar-text">Logout</span>
             </a>
-
         </li>
     </ul>
 </div>
