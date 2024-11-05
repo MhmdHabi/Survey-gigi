@@ -10,19 +10,19 @@
                 @csrf
 
                 <div class="mb-4">
-                    <label for="name" class="block text-sm font-semibold text-gray-700">Nama Lengkap</label>
+                    <label for="name" class="block text-sm font-semibold text-gray-700">Nama Lengkap Orang Tua</label>
                     <input type="text" id="name" name="name" required
                         class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-blue-200">
                 </div>
 
                 <div class="mb-4">
-                    <label for="age" class="block text-sm font-semibold text-gray-700">Umur</label>
+                    <label for="age" class="block text-sm font-semibold text-gray-700">Umur Orang Tua</label>
                     <input type="number" id="age" name="age" required
                         class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-blue-200">
                 </div>
 
                 <div class="mb-4">
-                    <label class="block text-sm font-semibold text-gray-700">Jenis Kelamin</label>
+                    <label class="block text-sm font-semibold text-gray-700">Jenis Kelamin Orang Tua</label>
                     <div class="mt-1">
                         <label class="inline-flex items-center">
                             <input type="radio" name="gender" value="laki-laki" class="form-radio text-blue-600"

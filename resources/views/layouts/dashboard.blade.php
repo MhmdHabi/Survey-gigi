@@ -21,6 +21,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- CDN DataTables CSS -->
+    <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+
     <title>Dashboard Admin</title>
 
     <style>

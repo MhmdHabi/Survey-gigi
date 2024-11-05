@@ -23,8 +23,9 @@
                 </div>
                 <div class="flex mb-2">
                     <span class="font-medium text-gray-800 w-1/3">Tanggal Lahir:</span>
-                    <span
-                        class="text-gray-600 w-2/3">{{ \Carbon\Carbon::parse($surveyResponses->first()->survey_response->birth_date)->translatedFormat('l, d F Y') }}</span>
+                    <span class="text-gray-600 w-2/3">
+                        {{ \Carbon\Carbon::parse($surveyResponses->first()->survey_response->birth_date)->isoFormat('dddd, D MMMM YYYY') }}
+                    </span>
                 </div>
                 <div class="flex mb-2">
                     <span class="font-medium text-gray-800 w-1/3">Umur:</span>
