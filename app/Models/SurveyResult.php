@@ -22,11 +22,11 @@ class SurveyResult extends Model
     }
     public function answer()
     {
-        return $this->belongsTo(answer::class);
+        return $this->belongsTo(Answer::class);
     }
     public function question()
     {
-        return $this->belongsTo(question::class);
+        return $this->belongsTo(Question::class);
     }
     public function surveyResponse(): BelongsTo
     {
