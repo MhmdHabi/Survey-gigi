@@ -138,6 +138,7 @@ class SurveyResponseController extends Controller
             ->select(
                 'survey_responses.id',
                 'surveys.title',
+                'survey_responses.survey_id',
                 'survey_responses.child_name',
                 'survey_responses.birth_date',
                 'survey_responses.gender',
@@ -149,17 +150,42 @@ class SurveyResponseController extends Controller
             )
             ->get();
 
-        // Add a message and image based on hasil
         foreach ($surveyResponses as $response) {
-            if ($response->hasil >= 76) {
-                $response->evaluation = 'Baik';
-                $response->image = asset('path/to/good_image.jpg'); // Adjust the path to your image
-            } elseif ($response->hasil >= 56) {
-                $response->evaluation = 'Sedang';
-                $response->image = asset('path/to/average_image.jpg'); // Adjust the path to your image
+            if ($response->survey_id == 2) {
+                // Kriteria untuk survey_id 2
+                if ($response->hasil >= 76) {
+                    $response->evaluation = 'Sangat Tepat';
+                    $response->image = asset('path/to/sangat_tepat_image.jpg'); // Adjust the path to your image
+                } elseif ($response->hasil >= 56) {
+                    $response->evaluation = 'Tepat';
+                    $response->image = asset('path/to/tepat_image.jpg'); // Adjust the path to your image
+                } else {
+                    $response->evaluation = 'Kurang Tepat';
+                    $response->image = asset('path/to/kurang_tepat_image.jpg'); // Adjust the path to your image
+                }
+            } else if ($response->survey_id == 1) {
+                // Kriteria untuk survey selain survey_id 2
+                if ($response->hasil >= 76) {
+                    $response->evaluation = 'Baik';
+                    $response->image = asset('path/to/baik_image.jpg'); // Adjust the path to your image
+                } elseif ($response->hasil >= 56) {
+                    $response->evaluation = 'Cukup';
+                    $response->image = asset('path/to/cukup_image.jpg'); // Adjust the path to your image
+                } else {
+                    $response->evaluation = 'Kurang';
+                    $response->image = asset('path/to/kurang_image.jpg'); // Adjust the path to your image
+                }
             } else {
-                $response->evaluation = 'Buruk';
-                $response->image = asset('path/to/bad_image.jpg'); // Adjust the path to your image
+                if ($response->hasil >= 76) {
+                    $response->evaluation = 'Baik';
+                    $response->image = asset('path/to/baik_image.jpg'); // Adjust the path to your image
+                } elseif ($response->hasil >= 56) {
+                    $response->evaluation = 'sedang';
+                    $response->image = asset('path/to/cukup_image.jpg'); // Adjust the path to your image
+                } else {
+                    $response->evaluation = 'buruk';
+                    $response->image = asset('path/to/kurang_image.jpg'); // Adjust the path to your image
+                }
             }
         }
 

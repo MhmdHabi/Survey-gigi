@@ -106,13 +106,14 @@
                     {{-- Evaluation Message --}}
                     <div class="text-center mt-6">
                         @if ($surveyResponse->hasil >= 76)
-                            <p class="text-green-500 text-xl font-semibold">Kriteria: Baik</p>
+                            <p class="text-green-500 text-xl font-semibold">Kriteria: {{ $criteriaLabels['good'] }}</p>
                         @elseif ($surveyResponse->hasil >= 56)
-                            <p class="text-yellow-500 text-xl font-semibold">Kriteria: Cukup</p>
+                            <p class="text-yellow-500 text-xl font-semibold">Kriteria: {{ $criteriaLabels['fair'] }}</p>
                         @else
-                            <p class="text-red-500 text-xl font-semibold">Kriteria: Kurang</p>
+                            <p class="text-red-500 text-xl font-semibold">Kriteria: {{ $criteriaLabels['poor'] }}</p>
                         @endif
                     </div>
+
 
                     {{-- Criteria Table --}}
                     <div class="pt-4">
@@ -126,15 +127,15 @@
                             </thead>
                             <tbody>
                                 <tr class="border-t border-gray-300">
-                                    <td class="py-3 px-4">Baik</td>
+                                    <td class="py-3 px-4">{{ $criteriaLabels['good'] }}</td>
                                     <td class="py-3 px-4">76% - 100%</td>
                                 </tr>
                                 <tr class="bg-gray-100 border-t border-gray-300">
-                                    <td class="py-3 px-4">Cukup</td>
+                                    <td class="py-3 px-4">{{ $criteriaLabels['fair'] }}</td>
                                     <td class="py-3 px-4">56% - 75%</td>
                                 </tr>
                                 <tr class="border-t border-gray-300">
-                                    <td class="py-3 px-4">Kurang</td>
+                                    <td class="py-3 px-4">{{ $criteriaLabels['poor'] }}</td>
                                     <td class="py-3 px-4">&lt; 56%</td>
                                 </tr>
                             </tbody>

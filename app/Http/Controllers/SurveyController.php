@@ -85,11 +85,12 @@ class SurveyController extends Controller
 
     public function resultsSurvey($surveyResponseId)
     {
-        $surveyResponse = SurveyResponse::where('survey_responses.id', $surveyResponseId) // Menyebutkan alias tabel
+        $surveyResponse = SurveyResponse::where('survey_responses.id', $surveyResponseId)
             ->join('surveys', 'survey_responses.survey_id', '=', 'surveys.id')
-            ->join('users', 'survey_responses.user_id', '=', 'users.id') // Bergabung dengan tabel users
+            ->join('users', 'survey_responses.user_id', '=', 'users.id')
             ->select(
                 'survey_responses.id',
+                'surveys.id as survey_id', // Menyimpan survey_id untuk pengecekan
                 'surveys.title',
                 'survey_responses.child_name',
                 'survey_responses.birth_date',
@@ -98,8 +99,24 @@ class SurveyController extends Controller
                 'users.name as parent_name'
             )
             ->firstOrFail();
-        $images = Image::all(); // Mendapatkan hasil pertama atau gagal jika tidak ditemukan
 
-        return view('home.survey.hasil-survey', compact('surveyResponse', 'images')); // Kirim data ke view
+        $images = Image::all();
+
+        // Tentukan label hasil berdasarkan survey_id
+        $criteriaLabels = ($surveyResponse->survey_id == 2) ? [
+            'good' => 'Sangat Tepat',
+            'fair' => 'Tepat',
+            'poor' => 'Kurang Tepat'
+        ] : (($surveyResponse->survey_id == 1) ? [
+            'good' => 'Baik',
+            'fair' => 'Cukup',
+            'poor' => 'Kurang'
+        ] : [
+            'good' => 'Baik',
+            'fair' => 'Sedang',
+            'poor' => 'Buruk'
+        ]);
+
+        return view('home.survey.hasil-survey', compact('surveyResponse', 'images', 'criteriaLabels'));
     }
 }

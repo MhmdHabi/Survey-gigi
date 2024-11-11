@@ -66,11 +66,13 @@
                         {{-- Display Evaluation Message and Image --}}
                         <div class="flex flex-col items-center mb-4">
                             <p class="font-semibold">
-                                Kriteria: {{ $response->evaluation }}
+                                Kriteria: <span class="text-blue-500">{{ $response->evaluation }}</span>
                             </p>
-                            <img src="{{ asset('storage/' . $response->path) }}" alt="{{ $response->keterangan }}"
-                                class="h-16 w-16 object-cover mb-2">
-                            <p class="text-gray-600">{{ $response->keterangan }}</p>
+                            @if (isset($response->image))
+                                <img src="{{ asset('storage/' . $response->path) }}" alt="{{ $response->keterangan }}"
+                                    class="h-16 w-16 object-cover mb-2 rounded-full">
+                            @endif
+                            <p class="text-gray-600 text-center">{{ $response->keterangan }}</p>
                         </div>
 
                         <a href="{{ route('survey.results.show', $response->id) }}"
