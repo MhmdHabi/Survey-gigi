@@ -11,11 +11,10 @@
             data-aos-duration="1000" data-aos-easing="ease-in-out" data-aos-delay="200">
             <h2 class="text-3xl font-bold text-[#5DB9FF] mb-4">Kesehatan Gigi</h2>
             <p class="text-black mb-7 text-justify">
-                Kesehatan gigi adalah bagian penting dari kesehatan keseluruhan. Memelihara kesehatan gigi Anda tidak
-                hanya membantu dalam menjaga senyuman yang indah, tetapi juga mencegah masalah kesehatan yang lebih
-                serius.
-                Pastikan untuk menyikat gigi setidaknya dua kali sehari, menggunakan benang gigi, dan rutin memeriksakan
-                gigi Anda ke dokter gigi.
+                Kesehatan gigi adalah bagian penting dari kesehatan keseluruhan. Memelihara kesehatan gigi Anak Anda
+                tidak hanya membantu dalam menjaga senyuman indah, tetapi juga mencegah masalah kesehatan yang lebih
+                serius. Pastikan untuk menyikat gigi minimal dua kali sehari, menggunakan benang gigi, dan rutin
+                memeriksakan gigi Anak Anda ke Dokter Gigi
             </p>
             <p class="text-black mb-4 text-justify">
                 Perawatan gigi yang baik dapat mencegah pembentukan plak, gigi berlubang, dan penyakit gusi. Jangan

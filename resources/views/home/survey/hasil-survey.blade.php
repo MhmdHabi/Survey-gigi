@@ -27,7 +27,8 @@
 
                             {{-- Instructional Note --}}
                             <p class="text-sm text-gray-500 mb-4 text-center">
-                                Pilih foto yang paling sesuai dengan keadaan anak Anda saat ini untuk memberikan dukungan
+                                Pilih foto yang paling sesuai dengan keadaan besar anak Anda saat ini untuk memberikan
+                                dukungan
                                 yang tepat.
                             </p>
 

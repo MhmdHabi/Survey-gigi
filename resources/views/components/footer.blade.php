@@ -9,7 +9,7 @@
                 <img src="{{ asset('assets/logo-image.png') }}" alt="Website Logo"
                     class="h-20 mr-3 opacity-90 filter hue-rotate-15">
                 <div>
-                    <h2 class="text-lg font-semibold">ECC Denth</h2>
+                    <h2 class="text-lg font-semibold">ECC Dentch</h2>
                     <p class="text-sm text-gray-300">Early Childhood Caries Dental Technology</p>
                 </div>
             </div>

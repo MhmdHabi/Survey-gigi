@@ -28,7 +28,7 @@ class AuthController extends Controller
 
 
         return back()->withErrors([
-            'email' => 'Invalid credentials provided.',
+            'email' => 'Kredensial yang diberikan tidak valid.',
         ])->withInput();
     }
     public function register()
@@ -52,17 +52,17 @@ class AuthController extends Controller
             'gender' => $request->gender,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'user', // Set role as 'user' by default
+            'role' => 'user',
         ]);
 
         Auth::login($user);
 
-        return redirect('/dashboard')->with('success', 'Registration successful');
+        return redirect('/dashboard')->with('success', 'Pendaftaran berhasil');
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect('/')->with('success', 'Logged out successfully');
+        return redirect('/')->with('success', 'Berhasil Keluar');
     }
 }

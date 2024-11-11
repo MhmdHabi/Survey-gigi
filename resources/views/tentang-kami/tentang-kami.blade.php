@@ -10,8 +10,8 @@
         <div class="lg:w-full px-0 lg:px-3 text-justify" data-aos="fade-left" data-aos-duration="1000">
             <h2 class="text-3xl font-semibold mb-6">Tentang Kami</h2>
             <p class="text-lg mb-4">
-                Kami adalah Fakultas Kedokteran Gigi Universitas Baiturrahman yang berdedikasi untuk menyediakan pendidikan
-                berkualitas dalam bidang kedokteran gigi. Dengan pengajaran yang inovatif dan fasilitas modern, kami
+                Kami adalah Fakultas Kedokteran Gigi Universitas Baiturrahmah yang berdedikasi untuk menyediakan pendidikan
+                berkualitas dalam bidang Kedokteran Gigi. Dengan pengajaran yang inovatif dan fasilitas modern, kami
                 berkomitmen untuk mempersiapkan mahasiswa kami menjadi profesional yang terampil dan peduli.
             </p>
             <h3 class="text-xl font-semibold mb-2">Visi</h3>

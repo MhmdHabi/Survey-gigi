@@ -75,7 +75,7 @@
 
                         <a href="{{ route('survey.results.show', $response->id) }}"
                             class="bg-blue-400 text-white py-2 px-4 rounded-full text-center hover:bg-blue-700 transition duration-300">
-                            Detail Survey
+                            Detail Survei
                         </a>
                     </div>
                 @endforeach
