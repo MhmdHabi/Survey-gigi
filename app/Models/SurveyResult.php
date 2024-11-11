@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Question;
 
 class SurveyResult extends Model
 {
@@ -22,11 +23,11 @@ class SurveyResult extends Model
     }
     public function answer()
     {
-        return $this->belongsTo(answer::class);
+        return $this->belongsTo(Answer::class);
     }
     public function question()
     {
-        return $this->belongsTo(question::class);
+        return $this->belongsTo(Question::class);
     }
     public function surveyResponse(): BelongsTo
     {

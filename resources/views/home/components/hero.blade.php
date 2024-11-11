@@ -1,4 +1,4 @@
-<section class="bg-blue-50 py-12 lg:py-20 font-poppins">
+<section class="bg-blue-50 py-12 lg:py-20 mt-0 lg:mt-7 font-poppins">
     <div class="container mx-auto flex flex-col lg:flex-row items-center px-16">
 
         <!-- Image Section -->
@@ -15,13 +15,13 @@
                     Sempurnakan <span class="text-[#5DB9FF]">Senyum</span>
                 </h1>
                 <h2 class="text-5xl font-bold text-black mb-7">
-                    Sempurnakan <span class="text-[#5DB9FF]">hidup</span>
+                    Sempurnakan <span class="text-[#5DB9FF]">Hidup</span>
                 </h2>
             </div>
             <p class="text-black mb-7">
-                Ikuti survei kesehatan gigi kami untuk mengetahui kondisi gigi dan mulut Anda. Dapatkan penilaian
-                mendalam dan rekomendasi perawatan yang disesuaikan, memastikan Anda mendapatkan perhatian terbaik untuk
-                senyum yang sehat dan cerah.
+                Ikuti survei kesehatan gigi kami untuk mengetahui kondisi gigi dan mulut Anak Anda. Dapatkan penilaian
+                mendalam dan rekomendasi perawatan yang sesuai, serta memastikan anak anda mendapatkan perhatian terbaik
+                untuk senyum yang sehat dan cerah.
             </p>
             <a href="#survey"
                 class="relative inline-block px-6 py-2 border border-[#5DB9FF] text-black rounded-full overflow-hidden group">

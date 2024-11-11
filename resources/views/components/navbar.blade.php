@@ -13,7 +13,7 @@
                 <a href="{{ route('home') }}"
                     class=" uppercase font-[500] font-poppins 
                           {{ request()->routeIs('home') ? 'border-b-2 border-[#5DB9FF]' : '' }}">
-                    Home
+                    Beranda
                 </a>
             </li>
             <li>
@@ -54,7 +54,7 @@
                 <div id="dropdown" class="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg hidden">
                     <a href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                        class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+                        class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Keluar</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                         @csrf
                     </form>
@@ -67,7 +67,7 @@
                     class="absolute inset-0 w-full h-full bg-[#5DB9FF] transform -translate-x-full transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
                 <span
                     class="relative z-10 transition-colors font-[500] font-poppins duration-300 ease-in-out group-hover:text-white">
-                    Login</span>
+                    Masuk</span>
             </a>
         @endauth
 
@@ -96,7 +96,7 @@
         <ul class="space-y-4 text-lg font-[500]">
             <li><a href="{{ route('home') }}"
                     class="text-gray-800 hover:text-blue-600 
-                       {{ request()->routeIs('home') ? 'border-b-2 border-[#5DB9FF]' : '' }}">Home</a>
+                       {{ request()->routeIs('home') ? 'border-b-2 border-[#5DB9FF]' : '' }}">Beranda</a>
             </li>
             <li><a href="{{ route('about') }}"
                     class="text-gray-800 hover:text-blue-600 
@@ -121,7 +121,7 @@
                     <div class=" bg-blue-100 rounded-md shadow-lg ">
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                            class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+                            class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Keluar</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                             @csrf
                         </form>
@@ -132,7 +132,7 @@
                         <span
                             class="absolute inset-0 w-full h-full bg-[#5DB9FF] transform -translate-x-full transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
                         <span
-                            class="relative z-10 transition-colors duration-300 ease-in-out group-hover:text-[#5DB9FF]">Login</span>
+                            class="relative z-10 transition-colors duration-300 ease-in-out group-hover:text-[#5DB9FF]">Masuk</span>
                     </a>
                 @endauth
             </li>
